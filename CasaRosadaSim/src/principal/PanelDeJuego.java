@@ -2,6 +2,7 @@ package principal;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -29,6 +30,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 
 	//SISTEMA
 	public Teclado teclado = new Teclado(this);
+	public UI ui = new UI(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
 	Thread hiloDeJuego;
@@ -131,6 +133,11 @@ public class PanelDeJuego extends JPanel implements Runnable {
 
 		Graphics2D g2 = (Graphics2D) g;
 		
+		g2.setFont(ui.getMaruMonica());
+		
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD,32f));
+		g2.drawString("Hola MUNDO!!!", 500, 300);
 		//DEBUG
 		long drawStart = 0;
 		if(teclado.comprobarTiempoDeDibujado == true) {
