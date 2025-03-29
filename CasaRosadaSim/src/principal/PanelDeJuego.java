@@ -60,7 +60,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 	
 	public void configuracionDeJuego() {
-		estadoDeJuego = modoCombate;
+		estadoDeJuego = modoJuego;
 	}
 
 	public void iniciarHiloDeJuego() {
@@ -133,18 +133,10 @@ public class PanelDeJuego extends JPanel implements Runnable {
 
 		Graphics2D g2 = (Graphics2D) g;
 		
-		g2.setFont(ui.getMaruMonica());
-		
-		g2.setColor(Color.white);
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD,32f));
-		g2.drawString("Hola MUNDO!!!", 500, 300);
 		//DEBUG
 		long drawStart = 0;
 		if(teclado.comprobarTiempoDeDibujado == true) {
 			drawStart = System.nanoTime();
-		}
-		//COMBATE
-		if(estadoDeJuego == modoCombate) {
 		}
 		//PANTALLA DE TITULO
 		if(estadoDeJuego == modoTitulo) {
@@ -159,7 +151,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			//JUGADOR Y NPC
 			
 			//UI
-			
+			ui.dibujar(g2);
 		}
 
 		//DEBUG
