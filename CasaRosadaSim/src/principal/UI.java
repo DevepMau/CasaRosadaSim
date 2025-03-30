@@ -12,6 +12,8 @@ import java.io.IOException;
  import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+
+import objetos.Objeto;
  
  public class UI {
  
@@ -24,12 +26,6 @@ import javax.imageio.ImageIO;
  	Color primarioOscuro = new Color(55, 105, 55);
  	Color primarioClaro = new Color(155, 255, 155);
  	Color secundario = new Color(15, 15, 15);
- 	Image monitor;
- 	Image telefono;
- 	Image muñeco;
- 	Image libro;
- 	Image mesa;
- 	Image carpetas;
  
  	public UI(PanelDeJuego pdj) {
  		
@@ -40,12 +36,6 @@ import javax.imageio.ImageIO;
  		try {
  			InputStream is = getClass().getResourceAsStream("/fuentes/MaruMonica.ttf");
  			maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
- 			monitor = configurarImagen("/mobiliario/monitor", 5);
- 			telefono = configurarImagen("/mobiliario/telefono", 4);
- 			muñeco = configurarImagen("/mobiliario/muñeco", 4);
- 			libro = configurarImagen("/mobiliario/libro", 4);
- 			mesa = configurarImagen("/mobiliario/mesa", 2);
- 			carpetas = configurarImagen("/mobiliario/carpetas", 4);
  			
  		} catch (FontFormatException e) {
  			e.printStackTrace();
@@ -118,12 +108,12 @@ import javax.imageio.ImageIO;
  	}
  	
  	private void dibujarEscritorio() {
- 		g2.drawImage(mesa, 0, pdj.altoDePantalla - (unidad*4), null);
- 		g2.drawImage(carpetas, unidad*14 + (unidad/2), unidad*6 + (unidad/2), null);
- 		g2.drawImage(telefono, unidad - (unidad/2), unidad*6, null);
- 		g2.drawImage(muñeco, unidad*2 + (unidad/2), unidad*9, null);
- 		g2.drawImage(libro, unidad*11, unidad*9 + (unidad/2), null);
- 		g2.drawImage(monitor, unidad*4 + (unidad/2), unidad*6 + (unidad/2), null);
+ 		//g2.drawImage(pdj.img.mesa, 0, pdj.altoDePantalla - (unidad*4), null);
+ 		//g2.drawImage(pdj.img.carpetas, unidad*14 + (unidad/2), unidad*6 + (unidad/2), null);
+ 		//g2.drawImage(pdj.img.telefono, unidad - (unidad/2), unidad*6, null);
+ 		//g2.drawImage(pdj.img.muñeco, unidad*2 + (unidad/2), unidad*9, null);
+ 		//g2.drawImage(pdj.img.libro, unidad*11, unidad*9 + (unidad/2), null);
+ 		//g2.drawImage(pdj.img.notebook, unidad*4 + (unidad/2), unidad*6 + (unidad/2), null);
  		
  	}
  	
