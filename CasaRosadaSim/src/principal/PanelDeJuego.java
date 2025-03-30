@@ -31,6 +31,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	//SISTEMA
 	public Teclado teclado = new Teclado(this);
 	public UI ui = new UI(this);
+	public Imagenes img = new Imagenes();
 	Raton raton = new Raton();
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
