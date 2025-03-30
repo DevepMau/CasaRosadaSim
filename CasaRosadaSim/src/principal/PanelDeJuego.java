@@ -8,6 +8,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import minijuegos.OficinaPresidencial;
+import objetos.Objeto;
+
 public class PanelDeJuego extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,9 +35,10 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public Teclado teclado = new Teclado(this);
 	public UI ui = new UI(this);
 	public Imagenes img = new Imagenes();
-	Raton raton = new Raton();
+	public Raton raton = new Raton();
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
+	OficinaPresidencial op = new OficinaPresidencial(this);
 	Thread hiloDeJuego;
 	
 	//ENTIDADES Y OBJETOS
@@ -118,17 +122,17 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 
 	public void actualizar() {
+		
+		//System.out.println(raton.posX+" / "+raton.posY);
 
 		if(estadoDeJuego == modoJuego) {
-			
-			//JUGADR
-			
-			//NPC
+			op.actualizar();
 		}
 		if(estadoDeJuego == modoPausa) {
 			
 		}
 		if(estadoDeJuego == modoCombate) {
+			
 		}
 	}
 
@@ -148,15 +152,10 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		//OTROS
 		else {
 			
-			//BALDOSAS
-			
-			//OBJETOS
-			
-			//JUGADOR Y NPC
-			
+			op.dibujar(g2);
 			//UI
 			ui.dibujar(g2);
-			ui.dibujarPantallaDeJuego();
+			//ui.dibujarPantallaDeJuego();
 		}
 
 		//DEBUG
