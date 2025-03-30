@@ -31,6 +31,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	//SISTEMA
 	public Teclado teclado = new Teclado(this);
 	public UI ui = new UI(this);
+	Raton raton = new Raton();
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
 	Thread hiloDeJuego;
@@ -56,6 +57,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(teclado);
 		this.setFocusable(true);
+		this.addMouseListener(raton);
+	    this.addMouseMotionListener(raton);
 
 	}
 	
