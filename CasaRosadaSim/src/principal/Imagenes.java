@@ -7,11 +7,11 @@ import javax.imageio.ImageIO;
 
 public class Imagenes {
 	
-	public BufferedImage notebook;
-	public BufferedImage telefono;
-	public BufferedImage muñeco;
-	public BufferedImage carpetas;
-	public BufferedImage libro;
+	public BufferedImage[] netbook = new BufferedImage[2];
+	public BufferedImage[] telefono = new BufferedImage[2];
+	public BufferedImage[] muñeco = new BufferedImage[2];
+	public BufferedImage[] carpetas = new BufferedImage[2];
+	public BufferedImage[] libro = new BufferedImage[2];
 	public BufferedImage mesa;
 
 	public Imagenes() {
@@ -24,12 +24,17 @@ public class Imagenes {
 
     private void inicializarImagenes() throws IOException { 
    
-    	notebook = configurarImagen("/mobiliario/monitor", 5);
-		telefono = configurarImagen("/mobiliario/telefono", 4);
-		muñeco = configurarImagen("/mobiliario/muñeco", 4);
-		libro = configurarImagen("/mobiliario/libro", 4);
+    	netbook[0] = configurarImagen("/mobiliario/netbook1", 5);
+    	netbook[1] = configurarImagen("/mobiliario/netbook2", 5);
+		telefono[0] = configurarImagen("/mobiliario/telefono1", 4);
+		telefono[1] = configurarImagen("/mobiliario/telefono2", 4);
+		muñeco[0] = configurarImagen("/mobiliario/muñeco1", 4);
+		muñeco[1] = configurarImagen("/mobiliario/muñeco2", 4);
+		libro[0] = configurarImagen("/mobiliario/libro1", 4);
+		libro[1] = configurarImagen("/mobiliario/libro2", 4);
+		carpetas[0] = configurarImagen("/mobiliario/carpetas1", 4);
+		carpetas[1] = configurarImagen("/mobiliario/carpetas2", 4);
 		mesa = configurarImagen("/mobiliario/mesa", 2);
-		carpetas = configurarImagen("/mobiliario/carpetas", 4);
     	
     }
 
