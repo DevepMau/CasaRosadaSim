@@ -152,6 +152,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			
 			//UI
 			ui.dibujar(g2);
+			ui.dibujarPantallaDeJuego();
 		}
 
 		//DEBUG
