@@ -1,6 +1,7 @@
 package principal;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -31,6 +32,9 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int anchoMundo = tamañoDeBaldosa * maxColDeMundo;
 	public final int altoMundo = tamañoDeBaldosa * maxFilaDeMundo;
 
+	//ESTADO DE LA NACION
+	Datos data = new Datos();
+	
 	//SISTEMA
 	public Teclado teclado = new Teclado(this);
 	public UI ui = new UI(this);
@@ -64,6 +68,10 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		this.setFocusable(true);
 		this.addMouseListener(raton);
 	    this.addMouseMotionListener(raton);
+	    setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+        // Otra opción para ocultar completamente el cursor
+        //setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 
 	}
 	
@@ -122,8 +130,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 
 	public void actualizar() {
-		
-		//System.out.println(raton.posX+" / "+raton.posY);
 
 		if(estadoDeJuego == modoJuego) {
 			op.actualizar();

@@ -5,15 +5,11 @@ package principal;
  import java.awt.Font;
  import java.awt.FontFormatException;
  import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Stroke;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+ import java.io.IOException;
  import java.io.InputStream;
+ import java.text.NumberFormat;
+ import java.util.Locale;
 
-import javax.imageio.ImageIO;
-
-import objetos.Objeto;
  
  public class UI {
  
@@ -22,16 +18,17 @@ import objetos.Objeto;
  	Font maruMonica;
  	int unidad;
  	int anchoDeLinea;
- 	Color primario  = new Color(143, 208, 50);
- 	Color primarioOscuro = new Color(55, 105, 55);
- 	Color primarioClaro = new Color(155, 255, 155);
- 	Color secundario = new Color(15, 15, 15);
+ 	Color blancoLinea  = new Color(255, 255, 255);
+ 	Color azulMecanico  = new Color(72, 82, 98);
+ 	Color negroTransparente = new Color(0, 0, 0, 205);
+ 	NumberFormat formato = NumberFormat.getCurrencyInstance(Locale.US); // Cambia "US" según el país
  
  	public UI(PanelDeJuego pdj) {
  		
  		this.pdj = pdj;
  		this.unidad = pdj.tamañoDeBaldosa;
- 		this.anchoDeLinea = pdj.tamañoDeBaldosa/16;
+ 		this.anchoDeLinea = pdj.tamañoDeBaldosa/8;
+ 		formato.setMaximumFractionDigits(0);
  	
  		try {
  			InputStream is = getClass().getResourceAsStream("/fuentes/MaruMonica.ttf");
@@ -49,9 +46,13 @@ import objetos.Objeto;
  		this.g2 = g2;
  
  		g2.setFont(maruMonica);
- 		g2.setStroke(new BasicStroke(anchoDeLinea));
+ 		g2.setStroke(new BasicStroke());
  		g2.setColor(Color.white);
  		g2.setFont(g2.getFont().deriveFont(Font.BOLD,16f));
+ 		switch(pdj.estadoDeJuego) {
+ 		case 1 -> dibujarPantallaDeJuego();
+ 		case 2 -> dibujarPantallaDePausa();
+ 		}
  
  	}
  	
@@ -60,7 +61,9 @@ import objetos.Objeto;
  	
  	public void dibujarPantallaDeJuego() {
  		dibujarFondo();
- 		dibujarEscritorio();
+ 		interfazDeReservas();
+ 		interfazDeFecha();
+ 		//infoSobrereservas();
  	}
  	
  	public void dibujarPantallaDePausa() {
@@ -68,35 +71,81 @@ import objetos.Objeto;
  	
  	public void dibujarPantallaDeDialogo() {
  	}
-
- 	public void dibujarSubVentana(int x, int y, int width, int height) {
- 
- 		Color c = new Color(0,0,0, 200);
- 		g2.setColor(c);
- 		g2.fillRoundRect(x, y, width, height, 35, 35);
- 		
- 		c = new Color(255, 255, 255);
- 		g2.setColor(c);
- 		g2.setStroke(new BasicStroke(5));
- 		g2.drawRoundRect(x, y, width-10, height-10, 25, 25);
- 
- 	}
- 
- 	public int obtenerXParaTextoCentrado(String texto) {
- 
- 		int longitud = (int) g2.getFontMetrics().getStringBounds(texto, g2).getWidth();
- 		int x = pdj.anchoDePantalla / 2 - longitud / 2;
- 		return x;
- 
+ 	
+ 	private void dibujarFondo() {
  	}
  	
- 	public void dibujarConversorDeMoneda() {
- 		g2.setColor(primarioOscuro);
- 		g2.fillRoundRect(unidad*1, unidad*5, unidad*4, unidad*2, unidad/8, unidad/8);
- 		g2.setColor(primario);
- 		g2.fillRoundRect(unidad*2, unidad*5, unidad*4, unidad*2, unidad/8, unidad/8);
- 		g2.setColor(secundario);
- 		g2.fillRect(unidad*2 + (unidad/4), unidad*5 + (unidad/4), unidad*4 - (unidad/2), unidad*2 - (unidad/2));
+ 	private void interfazDeReservas() {
+ 		
+ 		int alto = unidad + anchoDeLinea;
+ 		int ancho = unidad*6;
+ 		int posX = anchoDeLinea;
+ 		int posY = unidad/4;
+ 		
+ 		String texto = formato.format(pdj.data.getReservas())+ " M";
+ 		
+ 		dibujarSubVentana(posX, posY, ancho, alto);
+
+ 		g2.setStroke(new BasicStroke());
+ 		g2.setFont(g2.getFont().deriveFont(Font.BOLD,36f));
+ 		g2.setColor(blancoLinea);
+ 		g2.drawString(texto, obtenerXParaTextoCentrado(texto, ancho), posY + unidad/2 + anchoDeLinea*2);
+ 	}
+ 	
+ 	private void infoSobrereservas() {
+ 		
+ 		int alto = unidad*3 + unidad/2;
+ 		int ancho = unidad*7;
+ 		int posX = anchoDeLinea;
+ 		int posY = unidad + (unidad/2);
+ 		
+ 		String exportaciones = formato.format(pdj.data.getIngresoExportaciones())+ " M";
+ 		String inversiones = formato.format(pdj.data.getIngresoInversiones())+ " M";
+ 		String importaciones = formato.format(pdj.data.getGastoImportaciones())+ " M";
+ 		String cuotaDeDeuda = formato.format(pdj.data.getPagoDeuda())+ " M";
+ 		String variacionSemanal = formato.format(pdj.data.variacionSemanal())+ " M";
+ 		
+ 		dibujarSubVentana(posX, posY, ancho, alto);
+ 		
+ 		g2.setStroke(new BasicStroke());
+ 		g2.setFont(g2.getFont().deriveFont(Font.BOLD,24f));
+ 		g2.setColor(blancoLinea);
+ 		g2.drawString("Exportaciones: ", posX*2, posY + unidad/2 + anchoDeLinea);
+ 		g2.drawString("Inversiones: ", posX*2, posY + unidad + anchoDeLinea);
+ 		g2.drawString("Importaciones: ", posX*2, posY + unidad + (unidad/2) + anchoDeLinea);
+ 		g2.drawString("Cuota de deuda: ", posX*2, posY + unidad*2 + anchoDeLinea);
+ 		g2.drawString("Total: ", posX*2, posY + unidad*3 + anchoDeLinea);
+ 		
+ 		g2.setColor(Color.green);
+ 		g2.drawString(exportaciones, ancho - anchoDeLinea*2 - (anchoDeTexto(exportaciones)), posY + unidad/2 + anchoDeLinea);
+ 		g2.drawString(inversiones, ancho - anchoDeLinea*2 - (anchoDeTexto(inversiones)), posY + unidad + anchoDeLinea);
+ 		g2.setColor(Color.red);
+ 		g2.drawString(importaciones, ancho - anchoDeLinea*2 - (anchoDeTexto(importaciones)), posY + unidad + (unidad/2) + anchoDeLinea);
+ 		g2.drawString(cuotaDeDeuda, ancho - anchoDeLinea*2 - (anchoDeTexto(cuotaDeDeuda)), posY + unidad*2 + anchoDeLinea);
+ 		if(pdj.data.variacionSemanal() >= 0) {
+ 			g2.setColor(Color.green);
+ 		}
+ 		g2.drawString(variacionSemanal, ancho - anchoDeLinea*2 - (anchoDeTexto(variacionSemanal)), posY + unidad*3 + anchoDeLinea);
+ 		g2.setColor(blancoLinea);
+ 		
+ 	}
+ 	
+ 	public void interfazDeFecha() {
+ 		
+ 		String semanaTexto = "Semana "+pdj.data.getSemana();
+ 		String mesTexto = nombreDeMes(pdj.data.getMes())+" "+pdj.data.getAño();
+ 		int alto = unidad + unidad/2;
+ 		int ancho = unidad*3 + unidad/2;
+ 		int posX = pdj.anchoDePantalla - ancho;
+ 		int posY = unidad/4;
+ 		
+ 		dibujarSubVentana(posX, posY, ancho, alto);
+ 		
+ 		g2.setFont(g2.getFont().deriveFont(Font.BOLD,20f));
+ 		g2.setColor(blancoLinea);
+ 		g2.drawString(semanaTexto, posX + obtenerXParaTextoCentrado(semanaTexto, ancho), posY + unidad);
+ 		g2.drawString(mesTexto, posX + obtenerXParaTextoCentrado(mesTexto, ancho), posY + unidad/2);
+ 		
  	}
  	
  	public Font getMaruMonica() {
@@ -104,33 +153,50 @@ import objetos.Objeto;
  		return this.maruMonica;
  	}
  	
- 	private void dibujarFondo() {
+ 	private String nombreDeMes(int i) {
+ 		String mes = "";
+ 		switch(i) {
+ 		case 1 -> mes = "Enero";
+ 		case 2 -> mes = "Febrero";
+ 		case 3 -> mes = "Marzo";
+ 		case 4 -> mes = "Abril";
+ 		case 5 -> mes = "Mayo";
+ 		case 6 -> mes = "Junio";
+ 		case 7 -> mes = "Julio";
+ 		case 8 -> mes = "Agosto";
+ 		case 9 -> mes = "Septiembre";
+ 		case 10 -> mes = "Octubre";
+ 		case 11 -> mes = "Noviembre";
+ 		case 12 -> mes = "Diciembre";
+ 		}
+ 		return mes;
  	}
  	
- 	private void dibujarEscritorio() {
- 		//g2.drawImage(pdj.img.mesa, 0, pdj.altoDePantalla - (unidad*4), null);
- 		//g2.drawImage(pdj.img.carpetas, unidad*14 + (unidad/2), unidad*6 + (unidad/2), null);
- 		//g2.drawImage(pdj.img.telefono, unidad - (unidad/2), unidad*6, null);
- 		//g2.drawImage(pdj.img.muñeco, unidad*2 + (unidad/2), unidad*9, null);
- 		//g2.drawImage(pdj.img.libro, unidad*11, unidad*9 + (unidad/2), null);
- 		//g2.drawImage(pdj.img.notebook, unidad*4 + (unidad/2), unidad*6 + (unidad/2), null);
+ 	private int obtenerXParaTextoCentrado(String texto, int espacioDeUbicacion) {
+ 		 
+ 		int longitud = (int) g2.getFontMetrics().getStringBounds(texto, g2).getWidth();
+ 		int x = espacioDeUbicacion / 2 - longitud / 2;
+ 		return x;
+ 
+ 	}
+ 	
+ 	private int anchoDeTexto(String texto) {
+		 
+ 		return (int) g2.getFontMetrics().getStringBounds(texto, g2).getWidth();
+
+ 	}
+ 	
+ 	private void dibujarSubVentana(int x, int y, int width, int height) {
+ 		 
+ 		g2.setColor(negroTransparente);
+ 		g2.fillRoundRect(x, y, width, height, 2, 2);
  		
+ 		g2.setColor(azulMecanico);
+ 		g2.setStroke(new BasicStroke(anchoDeLinea));
+ 		g2.drawRoundRect(x, y, width-10, height-10, 2, 2);
+ 		
+ 		g2.setStroke(new BasicStroke());
+ 
  	}
- 	
- 	private void drawCustomRectangle(int x, int y, int base, int altura) {
-        int topWidth = (int) (base * 0.60);  // Lado superior = 3/4 de la base
-        int xOffset = (base - topWidth) / 2; // Para centrar el lado superior
-
-        int[] xPoints = { x, x + base, x + base - xOffset, x + xOffset };
-        int[] yPoints = { y + altura, y + altura, y, y };
-
-        g2.fillPolygon(xPoints, yPoints, 4);
-    }
- 	
- 	private BufferedImage configurarImagen(String rutaImagen, int escala) throws IOException {
-        Utilidades uTool = new Utilidades();
-        BufferedImage imagen = ImageIO.read(getClass().getResourceAsStream(rutaImagen + ".png"));
-        return uTool.escalarImagen(imagen, imagen.getWidth() / 2 * escala, imagen.getHeight() / 2 * escala);
-    }
  	
  }
