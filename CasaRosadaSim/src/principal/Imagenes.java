@@ -12,6 +12,7 @@ public class Imagenes {
 	public BufferedImage[] muñeco = new BufferedImage[2];
 	public BufferedImage[] carpetas = new BufferedImage[2];
 	public BufferedImage[] libro = new BufferedImage[2];
+	public BufferedImage[] cursor = new BufferedImage[2];
 	public BufferedImage mesa;
 
 	public Imagenes() {
@@ -34,6 +35,8 @@ public class Imagenes {
 		libro[1] = configurarImagen("/mobiliario/libro2", 4);
 		carpetas[0] = configurarImagen("/mobiliario/carpetas1", 4);
 		carpetas[1] = configurarImagen("/mobiliario/carpetas2", 4);
+		cursor[0] = configurarImagen("/cursores/mano_click", 4);
+		cursor[1] = configurarImagen("/cursores/mano_normal", 4);
 		mesa = configurarImagen("/mobiliario/mesa", 2);
     	
     }
