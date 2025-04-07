@@ -7,7 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import minijuegos.OficinaPresidencial;
+import areas.Area_Notebook;
+import areas.Area_OficinaPresidencial;
 
 public class PanelDeJuego extends JPanel implements Runnable {
 
@@ -39,7 +40,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public Raton raton = new Raton(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
-	OficinaPresidencial op = new OficinaPresidencial(this);
+	Area_OficinaPresidencial areaOficina = new Area_OficinaPresidencial(this);
+	Area_Notebook areaNotebook = new Area_Notebook(this);
 	Thread hiloDeJuego;
 	
 	//ENTIDADES Y OBJETOS
@@ -52,6 +54,15 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int modoPausa = 2;
 	public final int modoDialogo = 3;
 	public final int modoCombate = 4;
+	
+	//ZONA DE JUEGO
+	public int zonaDeJuego;
+	
+	public final int zonaOficina = 0;
+	public final int zonaNotebook = 1;
+	public final int zonaTelefono = 2;
+	public final int zonaMuñeco = 3;
+	public final int zonaCarpetas = 4;
 	
 	
 	// FPS
@@ -71,6 +82,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	
 	public void configuracionDeJuego() {
 		estadoDeJuego = modoJuego;
+		zonaDeJuego = zonaOficina;
 	}
 
 	public void iniciarHiloDeJuego() {
@@ -126,7 +138,23 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public void actualizar() {
 
 		if(estadoDeJuego == modoJuego) {
-			op.actualizar();
+			
+			if(zonaDeJuego == zonaOficina) {
+				areaOficina.actualizar();
+			}
+			if(zonaDeJuego == zonaNotebook) {
+				areaNotebook.actualizar();
+			}
+			if(zonaDeJuego == zonaTelefono) {
+				System.out.println("telefono");
+			}
+			if(zonaDeJuego == zonaMuñeco) {
+				System.out.println("muñeco");
+			}
+			if(zonaDeJuego == zonaCarpetas) {
+				System.out.println("carpetas");
+			}
+			
 		}
 		if(estadoDeJuego == modoPausa) {
 			
@@ -152,7 +180,20 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		//OTROS
 		else {
 			
-			op.dibujar(g2);
+			areaOficina.dibujar(g2);
+
+			if(zonaDeJuego == zonaNotebook) {
+				areaNotebook.dibujar(g2);
+			}
+			if(zonaDeJuego == zonaTelefono) {
+				
+			}
+			if(zonaDeJuego == zonaMuñeco) {
+
+			}
+			if(zonaDeJuego == zonaCarpetas) {
+
+			}
 			//UI
 			ui.dibujar(g2);
 			//ui.dibujarPantallaDeJuego();

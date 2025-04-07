@@ -17,7 +17,7 @@ public class Raton implements MouseListener, MouseMotionListener {
     public Raton(PanelDeJuego pdj) {
 		this.pdj = pdj;
 		
-		Point hotspot = new Point(0, 0);
+		Point hotspot = new Point(8, 4);
         cursorNormal = Toolkit.getDefaultToolkit().createCustomCursor(pdj.img.cursor[1], hotspot, "CursorNormal");
         cursorClick = Toolkit.getDefaultToolkit().createCustomCursor(pdj.img.cursor[0], hotspot, "CursorClick");
 
@@ -26,6 +26,7 @@ public class Raton implements MouseListener, MouseMotionListener {
 	@Override
     public void mouseClicked(MouseEvent e) {
     	CLICK = true;
+    	CLICK = false;
     }
 
 	@Override
@@ -52,12 +53,14 @@ public class Raton implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+    	CLICK = false;
         posX = e.getX();
         posY = e.getY();
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    	CLICK = true;
     	pdj.setCursor(cursorClick);
     }
 }
