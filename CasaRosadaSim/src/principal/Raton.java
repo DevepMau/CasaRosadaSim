@@ -1,46 +1,63 @@
 package principal;
 
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 public class Raton implements MouseListener, MouseMotionListener {
 	
+	PanelDeJuego pdj;
+	private Cursor cursorNormal;
+	private Cursor cursorClick;
 	public int posX;
 	public int posY;
+	public boolean CLICK;
 	
-    @Override
+    public Raton(PanelDeJuego pdj) {
+		this.pdj = pdj;
+		
+		Point hotspot = new Point(0, 0);
+        cursorNormal = Toolkit.getDefaultToolkit().createCustomCursor(pdj.img.cursor[1], hotspot, "CursorNormal");
+        cursorClick = Toolkit.getDefaultToolkit().createCustomCursor(pdj.img.cursor[0], hotspot, "CursorClick");
+
+	}
+
+	@Override
     public void mouseClicked(MouseEvent e) {
-        //System.out.println("Clic en: (" + e.getX() + ", " + e.getY() + ")");
+    	CLICK = true;
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //System.out.println("Botón presionado en: (" + e.getX() + ", " + e.getY() + ")");
-    }
+	@Override
+	public void mousePressed(MouseEvent e) {
+	    CLICK = true;
+	    pdj.setCursor(cursorClick);
+	}
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        //System.out.println("Botón liberado en: (" + e.getX() + ", " + e.getY() + ")");
-    }
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	    CLICK = false;
+	    pdj.setCursor(cursorNormal);
+	}
 
     @Override
     public void mouseEntered(MouseEvent e) {
-       System.out.println("Ratón entró en la ventana");
+    	pdj.setCursor(cursorNormal);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("Ratón salió de la ventana");
+        pdj.setCursor(Cursor.getDefaultCursor());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        //System.out.println("Ratón movido a: (" + e.getX() + ", " + e.getY() + ")");
         posX = e.getX();
         posY = e.getY();
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        //System.out.println("Arrastrando el ratón a: (" + e.getX() + ", " + e.getY() + ")");
+    	pdj.setCursor(cursorClick);
     }
 }

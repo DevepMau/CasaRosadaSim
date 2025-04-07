@@ -1,16 +1,13 @@
 package principal;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
 import minijuegos.OficinaPresidencial;
-import objetos.Objeto;
 
 public class PanelDeJuego extends JPanel implements Runnable {
 
@@ -39,7 +36,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public Teclado teclado = new Teclado(this);
 	public UI ui = new UI(this);
 	public Imagenes img = new Imagenes();
-	public Raton raton = new Raton();
+	public Raton raton = new Raton(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
 	OficinaPresidencial op = new OficinaPresidencial(this);
@@ -56,6 +53,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int modoDialogo = 3;
 	public final int modoCombate = 4;
 	
+	
 	// FPS
 	int FPS = 60;
 
@@ -68,10 +66,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		this.setFocusable(true);
 		this.addMouseListener(raton);
 	    this.addMouseMotionListener(raton);
-	    setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-
-        // Otra opción para ocultar completamente el cursor
-        //setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 
 	}
 	
