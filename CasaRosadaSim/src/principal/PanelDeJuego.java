@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import areas.Area_Notebook;
-import areas.Area_OficinaPresidencial;
+import areas.AREA_Notebook;
+import areas.AREA_Oficina;
 
 public class PanelDeJuego extends JPanel implements Runnable {
 
@@ -40,8 +40,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public Raton raton = new Raton(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
-	Area_OficinaPresidencial areaOficina = new Area_OficinaPresidencial(this);
-	Area_Notebook areaNotebook = new Area_Notebook(this);
+	AREA_Oficina areaOficina = new AREA_Oficina(this);
+	AREA_Notebook areaNotebook = new AREA_Notebook(this);
 	Thread hiloDeJuego;
 	
 	//ENTIDADES Y OBJETOS

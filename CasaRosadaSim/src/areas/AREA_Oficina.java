@@ -6,23 +6,21 @@ import java.awt.image.BufferedImage;
 import objetos.Objeto;
 import principal.PanelDeJuego;
 
-public class Area_OficinaPresidencial {
+public class AREA_Oficina extends Area {
 	
-	PanelDeJuego pdj;
-	private int unidad;
  	Objeto[] mobiliario = new Objeto[5];
  	BufferedImage mesa;
  	
- 	public Area_OficinaPresidencial(PanelDeJuego pdj) {
+ 	public AREA_Oficina(PanelDeJuego pdj) {
  		
- 		this.pdj = pdj;
- 		this.unidad = pdj.tamañoDeBaldosa;
+ 		super(pdj);
+ 		
  		mesa = pdj.img.mesa;
- 		mobiliario[0] = new Objeto(pdj.img.netbook, unidad*4 + (unidad/2), unidad*6 + (unidad/2));
- 		mobiliario[1] = new Objeto(pdj.img.carpetas, unidad*14 + (unidad/2), unidad*6 + (unidad/2));
- 		mobiliario[2] = new Objeto(pdj.img.telefono, unidad - (unidad/2), unidad*6);
- 		mobiliario[3] = new Objeto(pdj.img.muñeco, unidad*2 + (unidad/2), unidad*9);
- 		mobiliario[4] = new Objeto(pdj.img.libro,unidad*11, unidad*9 + (unidad/2));
+ 		mobiliario[0] = new Objeto(pdj.img.netbook, getUnidad()*4 + (getUnidad()/2), getUnidad()*6 + (getUnidad()/2));
+ 		mobiliario[1] = new Objeto(pdj.img.carpetas, getUnidad()*14 + (getUnidad()/2), getUnidad()*6 + (getUnidad()/2));
+ 		mobiliario[2] = new Objeto(pdj.img.telefono, getUnidad() - (getUnidad()/2), getUnidad()*6);
+ 		mobiliario[3] = new Objeto(pdj.img.muñeco, getUnidad()*2 + (getUnidad()/2), getUnidad()*9);
+ 		mobiliario[4] = new Objeto(pdj.img.libro,getUnidad()*11, getUnidad()*9 + (getUnidad()/2));
 
  	}
  	
@@ -50,7 +48,7 @@ public class Area_OficinaPresidencial {
  	}
  	
  	public void dibujar(Graphics2D g2) {
- 		g2.drawImage(pdj.img.mesa, 0, pdj.altoDePantalla - (unidad*4), null);
+ 		g2.drawImage(pdj.img.mesa, 0, pdj.altoDePantalla - (getUnidad()*4), null);
  		for(Objeto objeto : mobiliario) {
  			objeto.dibujar(g2);
  			objeto.dibujarAreaSolida(g2);
