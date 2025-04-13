@@ -22,7 +22,7 @@ public class Area {
 
 	public void actualizar() {
 		if(pdj.teclado.ESCAPE) {
- 			pdj.zonaDeJuego = pdj.zonaOficina;
+ 			pdj.zonaDeJuego = pdj.ZONA_OFICINA;
  		}
 	}
 	

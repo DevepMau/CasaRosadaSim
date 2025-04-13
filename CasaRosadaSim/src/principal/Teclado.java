@@ -24,7 +24,7 @@ public class Teclado implements KeyListener {
 		int codigo = e.getKeyCode();
 		
 		//MODO JUEGO
-		if(pdj.estadoDeJuego == pdj.modoJuego) {
+		if(pdj.estadoDeJuego == pdj.MODO_JUEGO) {
 			
 			if(codigo == KeyEvent.VK_W) {
 				W = true;
@@ -39,7 +39,7 @@ public class Teclado implements KeyListener {
 				D = true;
 			}
 			if(codigo == KeyEvent.VK_P) {
-				pdj.estadoDeJuego = pdj.modoPausa;
+				pdj.estadoDeJuego = pdj.MODO_PAUSA;
 			}
 			if(codigo == KeyEvent.VK_ENTER) {
 				ENTER = true;
@@ -58,15 +58,15 @@ public class Teclado implements KeyListener {
 			}
 		}
 		//MODO PAUSA
-		else if(pdj.estadoDeJuego == pdj.modoPausa) {
+		else if(pdj.estadoDeJuego == pdj.MODO_PAUSA) {
 			if(codigo == KeyEvent.VK_P) {
-				pdj.estadoDeJuego = pdj.modoJuego;
+				pdj.estadoDeJuego = pdj.MODO_JUEGO;
 			}
 		}
 		//MODO DIALOGO
-		else if(pdj.estadoDeJuego == pdj.modoDialogo) {
+		else if(pdj.estadoDeJuego == pdj.MODO_DIALOGO) {
 			if(codigo == KeyEvent.VK_ENTER) {
-				pdj.estadoDeJuego = pdj.modoJuego;
+				pdj.estadoDeJuego = pdj.MODO_JUEGO;
 			}
 		}
 		

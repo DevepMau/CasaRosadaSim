@@ -7,8 +7,12 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import areas.AREA_Carpetas;
+import areas.AREA_Libro;
+import areas.AREA_Muñeco;
 import areas.AREA_Notebook;
 import areas.AREA_Oficina;
+import areas.AREA_Telefono;
 
 public class PanelDeJuego extends JPanel implements Runnable {
 
@@ -40,29 +44,36 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public Raton raton = new Raton(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
+	
+	//AREAS
 	AREA_Oficina areaOficina = new AREA_Oficina(this);
 	AREA_Notebook areaNotebook = new AREA_Notebook(this);
-	Thread hiloDeJuego;
+	AREA_Telefono areaTelefono = new AREA_Telefono(this);
+	AREA_Muñeco areaMuñeco = new AREA_Muñeco(this);
+	AREA_Libro areaLibro = new AREA_Libro(this);
+	AREA_Carpetas areaCarpetas = new AREA_Carpetas(this);
 	
-	//ENTIDADES Y OBJETOS
+	//HILO DE JUEGO
+	Thread hiloDeJuego;
 
 	//ESTADO DE JUEGO
 	public int estadoDeJuego;
 	
-	public final int modoTitulo = 0;
-	public final int modoJuego = 1;
-	public final int modoPausa = 2;
-	public final int modoDialogo = 3;
-	public final int modoCombate = 4;
+	public final int MODO_TITULO = 0;
+	public final int MODO_JUEGO = 1;
+	public final int MODO_PAUSA = 2;
+	public final int MODO_DIALOGO = 3;
+	public final int MODO_COMBATE = 4;
 	
 	//ZONA DE JUEGO
 	public int zonaDeJuego;
 	
-	public final int zonaOficina = 0;
-	public final int zonaNotebook = 1;
-	public final int zonaTelefono = 2;
-	public final int zonaMuñeco = 3;
-	public final int zonaCarpetas = 4;
+	public final int ZONA_OFICINA = 0;
+	public final int ZONA_NOTEBOOK = 1;
+	public final int ZONA_TELEFONO = 2;
+	public final int ZONA_MUÑECO = 3;
+	public final int ZONA_CARPETAS = 4;
+	public final int ZONA_LIBRO = 5;
 	
 	
 	// FPS
@@ -81,8 +92,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 	
 	public void configuracionDeJuego() {
-		estadoDeJuego = modoJuego;
-		zonaDeJuego = zonaOficina;
+		estadoDeJuego = MODO_JUEGO;
+		zonaDeJuego = ZONA_OFICINA;
 	}
 
 	public void iniciarHiloDeJuego() {
@@ -137,29 +148,23 @@ public class PanelDeJuego extends JPanel implements Runnable {
 
 	public void actualizar() {
 
-		if(estadoDeJuego == modoJuego) {
+		if(estadoDeJuego == MODO_JUEGO) {
 			
-			if(zonaDeJuego == zonaOficina) {
-				areaOficina.actualizar();
+			switch(zonaDeJuego) {
+			
+			case ZONA_NOTEBOOK -> areaNotebook.actualizar();
+			case ZONA_TELEFONO -> areaTelefono.actualizar();
+			case ZONA_MUÑECO -> areaMuñeco.actualizar();
+			case ZONA_CARPETAS -> areaCarpetas.actualizar();
+			case ZONA_LIBRO -> areaLibro.actualizar();
+			default -> areaOficina.actualizar();
+			
 			}
-			if(zonaDeJuego == zonaNotebook) {
-				areaNotebook.actualizar();
-			}
-			if(zonaDeJuego == zonaTelefono) {
-				System.out.println("telefono");
-			}
-			if(zonaDeJuego == zonaMuñeco) {
-				System.out.println("muñeco");
-			}
-			if(zonaDeJuego == zonaCarpetas) {
-				System.out.println("carpetas");
-			}
+		}
+		if(estadoDeJuego == MODO_PAUSA) {
 			
 		}
-		if(estadoDeJuego == modoPausa) {
-			
-		}
-		if(estadoDeJuego == modoCombate) {
+		if(estadoDeJuego == MODO_COMBATE) {
 			
 		}
 	}
@@ -175,25 +180,24 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			drawStart = System.nanoTime();
 		}
 		//PANTALLA DE TITULO
-		if(estadoDeJuego == modoTitulo) {
+		if(estadoDeJuego == MODO_TITULO) {
 		}
 		//OTROS
 		else {
 			
 			areaOficina.dibujar(g2);
 
-			if(zonaDeJuego == zonaNotebook) {
-				areaNotebook.dibujar(g2);
+			switch(zonaDeJuego) {
+			
+			case ZONA_NOTEBOOK -> areaNotebook.dibujar(g2);
+			case ZONA_TELEFONO -> areaTelefono.dibujar(g2);
+			case ZONA_MUÑECO -> areaMuñeco.dibujar(g2);
+			case ZONA_CARPETAS -> areaCarpetas.dibujar(g2);
+			case ZONA_LIBRO -> areaLibro.dibujar(g2);
+			default -> areaOficina.dibujar(g2);
+			
 			}
-			if(zonaDeJuego == zonaTelefono) {
-				
-			}
-			if(zonaDeJuego == zonaMuñeco) {
-
-			}
-			if(zonaDeJuego == zonaCarpetas) {
-
-			}
+			
 			//UI
 			ui.dibujar(g2);
 			//ui.dibujarPantallaDeJuego();

@@ -32,16 +32,19 @@ public class AREA_Oficina extends Area {
  		
  		if(pdj.raton.CLICK) {
  			if(mobiliario[0].isColision()) {
- 				pdj.zonaDeJuego = pdj.zonaNotebook;
+ 				pdj.zonaDeJuego = pdj.ZONA_NOTEBOOK;
  			}
  			else if(mobiliario[1].isColision()) {
- 				pdj.zonaDeJuego = pdj.zonaCarpetas;
+ 				pdj.zonaDeJuego = pdj.ZONA_CARPETAS;
  			}
  			else if(mobiliario[2].isColision()) {
- 				pdj.zonaDeJuego = pdj.zonaTelefono;
+ 				pdj.zonaDeJuego = pdj.ZONA_TELEFONO;
  			}
  			else if(mobiliario[3].isColision()) {
- 				pdj.zonaDeJuego = pdj.zonaMuñeco;
+ 				pdj.zonaDeJuego = pdj.ZONA_MUÑECO;
+ 			}
+ 			else if(mobiliario[4].isColision()) {
+ 				pdj.zonaDeJuego = pdj.ZONA_LIBRO;
  			}
  		}
  		
