@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-public class Objeto {
+public class ObjetoInteractivo {
 	
 	private int posX;
 	private int posY;
@@ -13,7 +13,7 @@ public class Objeto {
 	private BufferedImage[] imagenes;
 	private Rectangle areaSolida;
 	
-	public Objeto(BufferedImage[] imagenes, int posX, int posY) {
+	public ObjetoInteractivo(BufferedImage[] imagenes, int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
 		this.imagenes = imagenes;

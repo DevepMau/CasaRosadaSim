@@ -94,7 +94,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 	
 	public void configuracionDeJuego() {
-		estadoDeJuego = MODO_DIALOGO;
+		estadoDeJuego = MODO_JUEGO;
 		zonaDeJuego = ZONA_OFICINA;
 	}
 
