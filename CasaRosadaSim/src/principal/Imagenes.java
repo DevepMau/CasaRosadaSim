@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class Imagenes {
 	
+	//OFICINA
 	public BufferedImage[] netbook = new BufferedImage[2];
 	public BufferedImage[] telefono = new BufferedImage[2];
 	public BufferedImage[] muñeco = new BufferedImage[2];
@@ -14,6 +15,12 @@ public class Imagenes {
 	public BufferedImage[] libro = new BufferedImage[2];
 	public BufferedImage[] cursor = new BufferedImage[2];
 	public BufferedImage mesa;
+	
+	//TELEFONO
+	public BufferedImage[] contacto = new BufferedImage[2];
+	
+	//PERSONAJES
+	public BufferedImage[] capote = new BufferedImage[4];
 
 	public Imagenes() {
         try {
@@ -25,6 +32,7 @@ public class Imagenes {
 
     private void inicializarImagenes() throws IOException { 
    
+    	//OFICINA
     	netbook[0] = configurarImagen("/mobiliario/netbook1", 5);
     	netbook[1] = configurarImagen("/mobiliario/netbook2", 5);
 		telefono[0] = configurarImagen("/mobiliario/telefono1", 4);
@@ -38,6 +46,16 @@ public class Imagenes {
 		cursor[0] = configurarImagen("/cursores/mano_click", 4);
 		cursor[1] = configurarImagen("/cursores/mano_normal", 4);
 		mesa = configurarImagen("/mobiliario/mesa", 2);
+		
+		//TELEFONO
+		contacto[0] = configurarImagen("/interfaz/contacto1", 2);
+		contacto[1] = configurarImagen("/interfaz/contacto2", 2);
+		
+		//PERSONAJES
+		capote[0] = configurarImagen("/personajes/capoteNormal", 5);
+		capote[1] = configurarImagen("/personajes/capoteFeliz", 5);
+		capote[2] = configurarImagen("/personajes/capoteTriste", 5);
+		capote[3] = configurarImagen("/personajes/capoteIcono", 2);
     	
     }
 
