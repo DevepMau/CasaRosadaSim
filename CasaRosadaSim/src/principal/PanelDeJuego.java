@@ -53,6 +53,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	AREA_Libro areaLibro = new AREA_Libro(this);
 	AREA_Carpetas areaCarpetas = new AREA_Carpetas(this);
 	
+	//JUEGOS
+	
 	//HILO DE JUEGO
 	Thread hiloDeJuego;
 
@@ -92,7 +94,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 	
 	public void configuracionDeJuego() {
-		estadoDeJuego = MODO_JUEGO;
+		estadoDeJuego = MODO_DIALOGO;
 		zonaDeJuego = ZONA_OFICINA;
 	}
 
@@ -164,8 +166,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		if(estadoDeJuego == MODO_PAUSA) {
 			
 		}
-		if(estadoDeJuego == MODO_COMBATE) {
-			
+		if(estadoDeJuego == MODO_DIALOGO) {
+
 		}
 	}
 
@@ -183,6 +185,9 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		if(estadoDeJuego == MODO_TITULO) {
 		}
 		//OTROS
+		else if(estadoDeJuego == MODO_DIALOGO) {
+
+		}
 		else {
 			
 			areaOficina.dibujar(g2);
