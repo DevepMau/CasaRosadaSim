@@ -13,9 +13,7 @@ public class ObjetoInteractivo {
 	private BufferedImage[] imagenes;
 	private Rectangle areaSolida;
 	
-	public ObjetoInteractivo(BufferedImage[] imagenes, int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+	public ObjetoInteractivo(BufferedImage[] imagenes) {
 		this.imagenes = imagenes;
 		this.areaSolida = new Rectangle(this.posX + (imagenes[0].getWidth()/8), 
 										this.posY + (imagenes[0].getHeight()/16), 
@@ -50,6 +48,14 @@ public class ObjetoInteractivo {
  	public boolean estaSobre(int mouseX, int mouseY) {
  	    return areaSolida.contains(mouseX, mouseY);
  	}
+ 	
+ 	public void setearPosicionObjeto(int posX, int posY) {
+ 		setPosX(posX);
+ 		setPosY(posY);
+ 		this.areaSolida.setLocation(posX + imagenes[0].getWidth()/8, posY + imagenes[0].getHeight()/16);
+ 	}
+ 	
+ 	///////////////////////////////////////////////////////////////////////////////
 
 	public int getPosX() {
 		return posX;

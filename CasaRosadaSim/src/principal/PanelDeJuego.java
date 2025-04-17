@@ -7,12 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import areas.AREA_Carpetas;
-import areas.AREA_Libro;
-import areas.AREA_Muñeco;
-import areas.AREA_Notebook;
-import areas.AREA_Oficina;
-import areas.AREA_Telefono;
+import areas.Area;
+import objetos.ObjetoInteractivo;
 
 public class PanelDeJuego extends JPanel implements Runnable {
 
@@ -42,16 +38,13 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public UI ui = new UI(this);
 	public Imagenes img = new Imagenes();
 	public Raton raton = new Raton(this);
+	public InicializadorDeRecursos inicializador = new InicializadorDeRecursos(this);
 	Sonido musica = new Sonido();
 	Sonido se = new Sonido();
 	
 	//AREAS
-	AREA_Oficina areaOficina = new AREA_Oficina(this);
-	AREA_Notebook areaNotebook = new AREA_Notebook(this);
-	AREA_Telefono areaTelefono = new AREA_Telefono(this);
-	AREA_Muñeco areaMuñeco = new AREA_Muñeco(this);
-	AREA_Libro areaLibro = new AREA_Libro(this);
-	AREA_Carpetas areaCarpetas = new AREA_Carpetas(this);
+	public Area areas[] = new Area[6];
+	public ObjetoInteractivo mobiliario[] = new ObjetoInteractivo[5];
 	
 	//JUEGOS
 	
@@ -94,6 +87,9 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	}
 	
 	public void configuracionDeJuego() {
+		inicializador.establecerAreas();
+		inicializador.establecerObjetos();
+		inicializador.establecerNPCs();
 		estadoDeJuego = MODO_JUEGO;
 		zonaDeJuego = ZONA_OFICINA;
 	}
@@ -154,12 +150,12 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			
 			switch(zonaDeJuego) {
 			
-			case ZONA_NOTEBOOK -> areaNotebook.actualizar();
-			case ZONA_TELEFONO -> areaTelefono.actualizar();
-			case ZONA_MUÑECO -> areaMuñeco.actualizar();
-			case ZONA_CARPETAS -> areaCarpetas.actualizar();
-			case ZONA_LIBRO -> areaLibro.actualizar();
-			default -> areaOficina.actualizar();
+			case ZONA_NOTEBOOK -> areas[1].actualizar();
+			case ZONA_TELEFONO -> areas[2].actualizar();
+			case ZONA_MUÑECO -> areas[3].actualizar();
+			case ZONA_CARPETAS -> areas[5].actualizar();
+			case ZONA_LIBRO -> areas[4].actualizar();
+			default -> areas[0].actualizar();
 			
 			}
 		}
@@ -190,16 +186,16 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		}
 		else {
 			
-			areaOficina.dibujar(g2);
+			areas[0].dibujar(g2);
 
 			switch(zonaDeJuego) {
 			
-			case ZONA_NOTEBOOK -> areaNotebook.dibujar(g2);
-			case ZONA_TELEFONO -> areaTelefono.dibujar(g2);
-			case ZONA_MUÑECO -> areaMuñeco.dibujar(g2);
-			case ZONA_CARPETAS -> areaCarpetas.dibujar(g2);
-			case ZONA_LIBRO -> areaLibro.dibujar(g2);
-			default -> areaOficina.dibujar(g2);
+			case ZONA_NOTEBOOK -> areas[1].dibujar(g2);
+			case ZONA_TELEFONO -> areas[2].dibujar(g2);
+			case ZONA_MUÑECO -> areas[3].dibujar(g2);
+			case ZONA_CARPETAS -> areas[5].dibujar(g2);
+			case ZONA_LIBRO -> areas[4].dibujar(g2);
+			default -> areas[0].dibujar(g2);
 			
 			}
 			

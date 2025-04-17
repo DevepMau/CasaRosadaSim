@@ -12,12 +12,12 @@ public class AREA_Telefono extends Area {
 	public AREA_Telefono(PanelDeJuego pdj) {
 		super(pdj);
 		
-		contactos[0] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*3);
-		contactos[1] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*6);
-		contactos[2] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*9);
-		contactos[3] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*3);
-		contactos[4] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*6);
-		contactos[5] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*9);
+		//contactos[0] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*3);
+		//contactos[1] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*6);
+		//contactos[2] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*2, getUnidad()*9);
+		//contactos[3] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*3);
+		//contactos[4] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*6);
+		//contactos[5] = new ObjetoInteractivo(pdj.img.contacto, getUnidad()*8, getUnidad()*9);
 		
 	}
 	
