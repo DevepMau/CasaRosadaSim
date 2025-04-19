@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import areas.Area;
+import entidades.Entidad;
+import minijuegos.GestorDeDecisiones;
 import objetos.ObjetoInteractivo;
 
 public class PanelDeJuego extends JPanel implements Runnable {
@@ -45,8 +47,10 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	//AREAS
 	public Area areas[] = new Area[6];
 	public ObjetoInteractivo mobiliario[] = new ObjetoInteractivo[5];
+	public Entidad gabinete[] = new Entidad[6];
 	
 	//JUEGOS
+	public GestorDeDecisiones gdd = new GestorDeDecisiones(this);
 	
 	//HILO DE JUEGO
 	Thread hiloDeJuego;
@@ -90,7 +94,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		inicializador.establecerAreas();
 		inicializador.establecerObjetos();
 		inicializador.establecerNPCs();
-		estadoDeJuego = MODO_JUEGO;
+		estadoDeJuego = MODO_DIALOGO;
 		zonaDeJuego = ZONA_OFICINA;
 	}
 
@@ -163,6 +167,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			
 		}
 		if(estadoDeJuego == MODO_DIALOGO) {
+			gdd.setearPNJ(gabinete[0]);
+			gdd.actualizar();
 
 		}
 	}
@@ -182,7 +188,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		}
 		//OTROS
 		else if(estadoDeJuego == MODO_DIALOGO) {
-
+			g2.drawImage(img.capote[0], 250, 150, null);
 		}
 		else {
 			
@@ -200,9 +206,11 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			}
 			
 			//UI
-			ui.dibujar(g2);
+			//ui.dibujar(g2);
 			//ui.dibujarPantallaDeJuego();
 		}
+		
+		ui.dibujar(g2);
 
 		//DEBUG
 		if(teclado.comprobarTiempoDeDibujado == true) {
