@@ -7,6 +7,7 @@ public class Teclado implements KeyListener {
 
 	PanelDeJuego pdj;
 	public boolean W, S, A, D, ENTER, ESCAPE;
+
 	//DEBUG
 	boolean comprobarTiempoDeDibujado = false;
 	
@@ -63,10 +64,11 @@ public class Teclado implements KeyListener {
 				pdj.estadoDeJuego = pdj.MODO_JUEGO;
 			}
 		}
+		
 		//MODO DIALOGO
-		else if(pdj.estadoDeJuego == pdj.MODO_DIALOGO) {
+		if(pdj.estadoDeJuego == pdj.MODO_DIALOGO) {
 			if(codigo == KeyEvent.VK_ENTER) {
-				pdj.estadoDeJuego = pdj.MODO_JUEGO;
+				ENTER = true;
 			}
 		}
 		

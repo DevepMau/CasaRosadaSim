@@ -21,6 +21,10 @@ package principal;
  	Color blancoLinea  = new Color(255, 255, 255);
  	Color azulMecanico  = new Color(72, 82, 98);
  	Color negroTransparente = new Color(0, 0, 0, 205);
+ 	public boolean textoCompleto = false;
+ 	public String dialogoActual = "";
+ 	public String dialogoMostrado = "";
+ 	public int cont = 0;
  	NumberFormat formato = NumberFormat.getCurrencyInstance(Locale.US); // Cambia "US" según el país
  
  	public UI(PanelDeJuego pdj) {
@@ -52,6 +56,7 @@ package principal;
  		switch(pdj.estadoDeJuego) {
  		case 1 -> dibujarPantallaDeJuego();
  		case 2 -> dibujarPantallaDePausa();
+ 		case 3 -> dibujarPantallaDeDialogo();
  		}
  
  	}
@@ -70,6 +75,48 @@ package principal;
  	}
  	
  	public void dibujarPantallaDeDialogo() {
+ 		
+ 		g2.drawImage(pdj.img.mesa, 0, pdj.tamañoDeBaldosa*9, null);
+
+		int x = pdj.tamañoDeBaldosa*2;
+		int y = pdj.tamañoDeBaldosa*8;
+		int width = pdj.anchoDePantalla - (pdj.tamañoDeBaldosa*4);
+		int height = pdj.tamañoDeBaldosa*4;
+
+		dibujarSubVentana(x, y, width, height);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+		x += pdj.tamañoDeBaldosa;
+		y += pdj.tamañoDeBaldosa;
+		
+		g2.setColor(blancoLinea);
+		
+		if(!textoCompleto) {
+			if(cont < dialogoActual.length()) {
+				dialogoMostrado += dialogoActual.charAt(cont);
+				cont++;	
+			}
+			else {
+				textoCompleto = true;
+			}
+		}
+
+		if(!dialogoActual.isEmpty()) {
+			for(String line : dialogoMostrado.split("\n")) {
+				g2.drawString(line, x - 20, y - 10);
+				y += 40;
+			}
+		}
+
+	}
+ 	
+ 	public void setearDialogo(String dialogo) {
+ 		
+ 		textoCompleto = false;
+ 		dialogoMostrado = "";
+ 		dialogoActual = dialogo;
+ 	 	cont = 0;
+ 	 	
  	}
  	
  	private void dibujarFondo() {
