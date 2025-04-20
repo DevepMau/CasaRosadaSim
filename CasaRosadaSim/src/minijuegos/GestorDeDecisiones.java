@@ -21,12 +21,18 @@ public class GestorDeDecisiones {
 				pdj.ui.setearDialogo(pnj.dialogos[pnj.dialogoIndice++]);
 			}
 			
+			pdj.ui.nombreDePNJ = pnj.getNombre();
+			pnj.actualizar();
 			pnj.hablar(pnj.dialogoIndice);
 			
 		}
 	}
 	
-	public void dibujar(Graphics2D g2) {}
+	public void dibujar(Graphics2D g2) {
+		if(pnj != null) {
+			pnj.dibujar(g2);
+		}
+	}
 	
 	//////////////////////////////////////////////////////////////////////////
 	

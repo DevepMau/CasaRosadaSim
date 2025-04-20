@@ -20,7 +20,8 @@ public class Imagenes {
 	public BufferedImage[] contacto = new BufferedImage[2];
 	
 	//PERSONAJES
-	public BufferedImage[] capote = new BufferedImage[4];
+	public BufferedImage toto_cuerpo;
+	public BufferedImage toto_cabeza;
 
 	public Imagenes() {
         try {
@@ -52,10 +53,8 @@ public class Imagenes {
 		contacto[1] = configurarImagen("/interfaz/contacto2", 2);
 		
 		//PERSONAJES
-		capote[0] = configurarImagen("/personajes/capoteNormal", 5);
-		capote[1] = configurarImagen("/personajes/capoteFeliz", 5);
-		capote[2] = configurarImagen("/personajes/capoteTriste", 5);
-		capote[3] = configurarImagen("/personajes/capoteIcono", 2);
+		toto_cuerpo = configurarImagen("/personajes/toto_cuerpo", 2);
+		toto_cabeza = configurarImagen("/personajes/toto_cabeza", 2);
     	
     }
 

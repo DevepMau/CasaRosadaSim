@@ -20,18 +20,28 @@ public class InicializadorDeRecursos {
 	public void establecerObjetos() {
 		pdj.mobiliario[0] = new ObjetoInteractivo(pdj.img.netbook);
 		pdj.mobiliario[0].setearPosicionObjeto(pdj.tamañoDeBaldosa*4 + (pdj.tamañoDeBaldosa/2), pdj.tamañoDeBaldosa*6 + (pdj.tamañoDeBaldosa/2));
-		
 		pdj.mobiliario[1] = new ObjetoInteractivo(pdj.img.carpetas);
 		pdj.mobiliario[1].setearPosicionObjeto(pdj.tamañoDeBaldosa*14 + (pdj.tamañoDeBaldosa/2), pdj.tamañoDeBaldosa*6 + (pdj.tamañoDeBaldosa/2));
-		
 		pdj.mobiliario[2] = new ObjetoInteractivo(pdj.img.telefono);
 		pdj.mobiliario[2].setearPosicionObjeto( pdj.tamañoDeBaldosa - (pdj.tamañoDeBaldosa/2), pdj.tamañoDeBaldosa*6);
-		
 		pdj.mobiliario[3] = new ObjetoInteractivo(pdj.img.muñeco);
 		pdj.mobiliario[3].setearPosicionObjeto( pdj.tamañoDeBaldosa*2 + (pdj.tamañoDeBaldosa/2), pdj.tamañoDeBaldosa*9);
-		
 		pdj.mobiliario[4] = new ObjetoInteractivo(pdj.img.libro);
 		pdj.mobiliario[4].setearPosicionObjeto( pdj.tamañoDeBaldosa*11, pdj.tamañoDeBaldosa*9 + (pdj.tamañoDeBaldosa/2));
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
+		pdj.contactos[0] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[1] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[2] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[3] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[4] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[5] = new ObjetoInteractivo(pdj.img.contacto);
+		pdj.contactos[0].setearPosicionObjeto( pdj.tamañoDeBaldosa*2, pdj.tamañoDeBaldosa*3);
+		pdj.contactos[1].setearPosicionObjeto( pdj.tamañoDeBaldosa*2, pdj.tamañoDeBaldosa*6);
+		pdj.contactos[2].setearPosicionObjeto( pdj.tamañoDeBaldosa*2, pdj.tamañoDeBaldosa*9);
+		pdj.contactos[3].setearPosicionObjeto( pdj.tamañoDeBaldosa*8, pdj.tamañoDeBaldosa*3);
+		pdj.contactos[4].setearPosicionObjeto( pdj.tamañoDeBaldosa*8, pdj.tamañoDeBaldosa*6);
+		pdj.contactos[5].setearPosicionObjeto( pdj.tamañoDeBaldosa*8, pdj.tamañoDeBaldosa*9);
 		
 	}
 	

@@ -47,6 +47,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	//AREAS
 	public Area areas[] = new Area[6];
 	public ObjetoInteractivo mobiliario[] = new ObjetoInteractivo[5];
+	public ObjetoInteractivo contactos[] = new ObjetoInteractivo[6];
 	public Entidad gabinete[] = new Entidad[6];
 	
 	//JUEGOS
@@ -94,7 +95,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		inicializador.establecerAreas();
 		inicializador.establecerObjetos();
 		inicializador.establecerNPCs();
-		estadoDeJuego = MODO_DIALOGO;
+		estadoDeJuego = MODO_JUEGO;
 		zonaDeJuego = ZONA_OFICINA;
 	}
 
@@ -167,7 +168,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			
 		}
 		if(estadoDeJuego == MODO_DIALOGO) {
-			gdd.setearPNJ(gabinete[0]);
 			gdd.actualizar();
 
 		}
@@ -188,7 +188,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		}
 		//OTROS
 		else if(estadoDeJuego == MODO_DIALOGO) {
-			g2.drawImage(img.capote[0], 250, 150, null);
+			gdd.dibujar(g2);
 		}
 		else {
 			

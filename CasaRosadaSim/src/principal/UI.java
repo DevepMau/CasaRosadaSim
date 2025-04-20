@@ -22,6 +22,7 @@ package principal;
  	Color azulMecanico  = new Color(72, 82, 98);
  	Color negroTransparente = new Color(0, 0, 0, 205);
  	public boolean textoCompleto = false;
+ 	public String nombreDePNJ = "";
  	public String dialogoActual = "";
  	public String dialogoMostrado = "";
  	public int cont = 0;
@@ -79,17 +80,22 @@ package principal;
  		g2.drawImage(pdj.img.mesa, 0, pdj.tamañoDeBaldosa*9, null);
 
 		int x = pdj.tamañoDeBaldosa*2;
-		int y = pdj.tamañoDeBaldosa*8;
+		int y = pdj.tamañoDeBaldosa*8 + (pdj.tamañoDeBaldosa/2);
 		int width = pdj.anchoDePantalla - (pdj.tamañoDeBaldosa*4);
-		int height = pdj.tamañoDeBaldosa*4;
+		int height = pdj.tamañoDeBaldosa*3 + (pdj.tamañoDeBaldosa/2);
 
 		dibujarSubVentana(x, y, width, height);
 		
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
-		x += pdj.tamañoDeBaldosa;
-		y += pdj.tamañoDeBaldosa;
+		g2.fillRect(x, y, pdj.tamañoDeBaldosa*3, pdj.tamañoDeBaldosa/2);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
 		
 		g2.setColor(blancoLinea);
+		
+		g2.drawString(nombreDePNJ, x + pdj.tamañoDeBaldosa/4, y + pdj.tamañoDeBaldosa/3);
+		
+		x += pdj.tamañoDeBaldosa;
+		y += pdj.tamañoDeBaldosa;
 		
 		if(!textoCompleto) {
 			if(cont < dialogoActual.length()) {
@@ -103,8 +109,8 @@ package principal;
 
 		if(!dialogoActual.isEmpty()) {
 			for(String line : dialogoMostrado.split("\n")) {
-				g2.drawString(line, x - 20, y - 10);
-				y += 40;
+				g2.drawString(line, x - 20, y + 5);
+				y += 30;
 			}
 		}
 
