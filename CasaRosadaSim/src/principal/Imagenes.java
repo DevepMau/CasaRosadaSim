@@ -18,6 +18,7 @@ public class Imagenes {
 	
 	//TELEFONO
 	public BufferedImage[] contacto = new BufferedImage[2];
+	public BufferedImage[] opcion = new BufferedImage[2];
 	
 	//PERSONAJES
 	public BufferedImage toto_cuerpo;
@@ -51,6 +52,8 @@ public class Imagenes {
 		//TELEFONO
 		contacto[0] = configurarImagen("/interfaz/contacto1", 2);
 		contacto[1] = configurarImagen("/interfaz/contacto2", 2);
+		opcion[0] = configurarImagen("/interfaz/opcion1", 2);
+		opcion[1] = configurarImagen("/interfaz/opcion2", 2);
 		
 		//PERSONAJES
 		toto_cuerpo = configurarImagen("/personajes/toto_cuerpo", 2);
