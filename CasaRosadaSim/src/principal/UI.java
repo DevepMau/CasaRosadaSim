@@ -10,6 +10,9 @@ package principal;
  import java.text.NumberFormat;
  import java.util.Locale;
 
+import entidades.Entidad;
+import objetos.Opcion;
+
  
  public class UI {
  
@@ -77,7 +80,8 @@ package principal;
  	
  	public void dibujarPantallaDeDialogo() {
  		
- 		g2.drawImage(pdj.img.mesa, 0, pdj.tamañoDeBaldosa*9, null);
+ 		interfazDeReservas();
+ 		interfazDeFecha();
 
 		int x = pdj.tamañoDeBaldosa*2;
 		int y = pdj.tamañoDeBaldosa*8 + (pdj.tamañoDeBaldosa/2);
@@ -116,11 +120,27 @@ package principal;
 
 	}
  	
+ 	public void dibujarPantallaDeOpciones(Entidad pnj,Graphics2D g2) {
+ 		
+ 		g2.setColor(negroTransparente);
+ 		g2.fillRect(0, 0, pdj.anchoDePantalla, pdj.altoDePantalla);
+ 		
+ 		g2.setColor(blancoLinea);
+ 		g2.setFont(maruMonica);
+ 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
+ 		
+ 		for(Opcion opciones : pnj.opciones.get(0)) {
+ 			opciones.dibujar(g2);
+ 			g2.drawString(opciones.getMensaje(), opciones.getPosX() + pdj.tamañoDeBaldosa/2, opciones.getPosY() + pdj.tamañoDeBaldosa/2 + pdj.tamañoDeBaldosa/6);
+ 		}
+ 		
+ 	}
+ 	
  	public void setearDialogo(String dialogo) {
  		
  		textoCompleto = false;
  		dialogoMostrado = "";
- 		dialogoActual = dialogo;
+ 		if(!dialogo.isEmpty()) {dialogoActual = dialogo;}
  	 	cont = 0;
  	 	
  	}
@@ -145,7 +165,7 @@ package principal;
  		g2.drawString(texto, obtenerXParaTextoCentrado(texto, ancho), posY + unidad/2 + anchoDeLinea*2);
  	}
  	
- 	private void infoSobrereservas() {
+ 	/*/private void infoSobrereservas() {
  		
  		int alto = unidad*3 + unidad/2;
  		int ancho = unidad*7;
@@ -181,7 +201,7 @@ package principal;
  		g2.drawString(variacionSemanal, ancho - anchoDeLinea*2 - (anchoDeTexto(variacionSemanal)), posY + unidad*3 + anchoDeLinea);
  		g2.setColor(blancoLinea);
  		
- 	}
+ 	}/*/
  	
  	public void interfazDeFecha() {
  		
@@ -233,11 +253,11 @@ package principal;
  
  	}
  	
- 	private int anchoDeTexto(String texto) {
+ 	/*/private int anchoDeTexto(String texto) {
 		 
  		return (int) g2.getFontMetrics().getStringBounds(texto, g2).getWidth();
 
- 	}
+ 	}/*/
  	
  	private void dibujarSubVentana(int x, int y, int width, int height) {
  		 

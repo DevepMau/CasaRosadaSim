@@ -63,7 +63,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int MODO_JUEGO = 1;
 	public final int MODO_PAUSA = 2;
 	public final int MODO_DIALOGO = 3;
-	public final int MODO_COMBATE = 4;
+	public final int MODO_OPCIONES = 4;
 	
 	//ZONA DE JUEGO
 	public int zonaDeJuego;
@@ -169,7 +169,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		}
 		if(estadoDeJuego == MODO_DIALOGO) {
 			gdd.actualizar();
-
 		}
 	}
 
@@ -189,8 +188,12 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		//OTROS
 		else if(estadoDeJuego == MODO_DIALOGO) {
 			gdd.dibujar(g2);
+			
+			if(gdd.isMostrarOpciones()) {
+				ui.dibujarPantallaDeOpciones(gdd.getPNJ() ,g2);
+			}
 		}
-		else {
+		else if(estadoDeJuego == MODO_JUEGO){
 			
 			areas[0].dibujar(g2);
 
@@ -204,10 +207,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			default -> areas[0].dibujar(g2);
 			
 			}
-			
-			//UI
-			//ui.dibujar(g2);
-			//ui.dibujarPantallaDeJuego();
+
 		}
 		
 		ui.dibujar(g2);

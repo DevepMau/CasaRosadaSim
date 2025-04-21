@@ -44,7 +44,7 @@ public class AREA_Oficina extends Area {
  		g2.drawImage(pdj.img.mesa, 0, pdj.altoDePantalla - (getUnidad()*4), null);
  		for(ObjetoInteractivo objeto : pdj.mobiliario) {
  			objeto.dibujar(g2);
- 			objeto.dibujarAreaSolida(g2);
+ 			//objeto.dibujarAreaSolida(g2);
  		}
  	}
 
