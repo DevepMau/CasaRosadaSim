@@ -6,7 +6,7 @@ import areas.AREA_Muñeco;
 import areas.AREA_Notebook;
 import areas.AREA_Oficina;
 import areas.AREA_Telefono;
-import entidades.Entidad;
+import entidades.PNJ_Toto;
 import objetos.ObjetoInteractivo;
 
 public class InicializadorDeRecursos {
@@ -46,7 +46,7 @@ public class InicializadorDeRecursos {
 	}
 	
 	public void establecerNPCs() {
-		pdj.gabinete[0] = new Entidad(pdj);
+		pdj.gabinete[0] = new PNJ_Toto(pdj);
 
 	}
 	
