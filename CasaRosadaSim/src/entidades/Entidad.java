@@ -2,6 +2,7 @@ package entidades;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import objetos.Opcion;
@@ -16,9 +17,11 @@ public class Entidad {
 	private int tiempoMov = 40;
 	private int imageMov = 0;
 	private boolean hayOpciones = false;
-	private String nombre = "Toto-chan";
-	private String[] mensaje = new String[10];
-	public HashMap<Integer, Opcion[]> opciones = new HashMap<>();
+	private String nombre;
+	private String[] mensaje;
+	private HashMap<Integer, Opcion[]> opciones;
+	private BufferedImage cabeza;
+	private BufferedImage cuerpo;
 	
 	public final String FIN_DE_DIALOGO = "Fin de dialogo...";
 	
@@ -47,29 +50,29 @@ public class Entidad {
 		hablar(dialogoIndice);
 		
 		if(hayOpciones()) {
-			for(Opcion opcion : opciones.get(0)) {
+			for(Opcion opcion : getOpciones().get(0)) {
 				opcion.actualizar(pdj.raton.posX, pdj.raton.posY);
 			}
 			
 			if(pdj.raton.CLICK && pdj.botonOn) {
 				
-	 			if(opciones.get(0)[0].isColision()) {
+	 			if(getOpciones().get(0)[0].isColision()) {
 
-	 				mensaje[dialogoIndice] = opciones.get(0)[0].getRespuesta();
+	 				mensaje[dialogoIndice] = getOpciones().get(0)[0].getRespuesta();
 	 				dialogoIndice--;
 	 				mostrarOpciones(false);
 	 				
 	 			}
-	 			else if(opciones.get(0)[1].isColision()) {
+	 			else if(getOpciones().get(0)[1].isColision()) {
 	 				
-	 				mensaje[dialogoIndice] = opciones.get(0)[1].getRespuesta();
+	 				mensaje[dialogoIndice] = getOpciones().get(0)[1].getRespuesta();
 	 				dialogoIndice--;
 	 				mostrarOpciones(false);
 
 	 			}
-	 			else if(opciones.get(0)[2].isColision()) {
+	 			else if(getOpciones().get(0)[2].isColision()) {
 	 				
-	 				mensaje[dialogoIndice] = opciones.get(0)[2].getRespuesta();
+	 				mensaje[dialogoIndice] = getOpciones().get(0)[2].getRespuesta();
 	 				dialogoIndice--;
 	 				mostrarOpciones(false);
 
@@ -80,8 +83,8 @@ public class Entidad {
 	
 	public void dibujar(Graphics2D g2) {
 		
-		g2.drawImage(pdj.img.toto_cuerpo, 250, 50 + imageMov, null);
-		g2.drawImage(pdj.img.toto_cabeza, 250, 50 + imageMov*2, null);
+		g2.drawImage(getCuerpo(), 250, 50 + imageMov, null);
+		g2.drawImage(getCabeza(), 250, 50 + imageMov*2, null);
 		
 		if(hayOpciones) {
 			g2.setColor(pdj.ui.negroTransparente);
@@ -91,55 +94,39 @@ public class Entidad {
 	 		g2.setFont(pdj.ui.getMaruMonica());
 	 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
 	 		
-	 		for(Opcion opciones : opciones.get(0)) {
+	 		for(Opcion opciones : getOpciones().get(0)) {
 	 			opciones.dibujar(g2);
 	 		}
 		}
 	}
 	
 	public void hablar(int indice) {
-		if(getMensaje(dialogoIndice) == null) {
+		if(obtenerMensaje(dialogoIndice) == null) {
 			dialogoIndice = 0; 
 		}
 		
-		if(!getMensaje(dialogoIndice).isEmpty()) {
-			pdj.ui.dialogoActual = getMensaje(dialogoIndice);
+		if(!obtenerMensaje(dialogoIndice).isEmpty()) {
+			pdj.ui.dialogoActual = obtenerMensaje(dialogoIndice);
 		}
 		
 				
 	}
 	
-	private void cargarMensajes() {
-		mensaje[0] = "Señor presidente! desea que hagamos otro pedido al FMI?\n"
-			    + "Tambien si gusta podemos realizar algun recorte! Si me\n"
-			    + "pregunta considero que la luz esta muy barata :D";
-		mensaje[1] = "Por favor digame que es lo que tiene en mente! ¿O acaso\n"
-			    + "refiere que sea yo quien elija como debetiamos proceder?\n"
-			    + "si es asi, no hay problema! confie en mi presi-kun! AH! \n"
-			    + "Lo siento! quiero decir... Señor Presidente!";
-		mensaje[2] = "";
-		mensaje[3] = "Hasta la proxima, señor presidente!";
-		mensaje[4] = FIN_DE_DIALOGO;
-		mensaje[5] = "nueva conversacion";
-		mensaje[6] = "fin de nueva conversacion";
-		mensaje[7] = FIN_DE_DIALOGO;
-		
-	}
-	
-	private void cargarOpciones() {
-		opciones.put(0, new Opcion[3]);
-		opciones.get(0)[0] = new Opcion(pdj.img.opcion);
-		opciones.get(0)[1] = new Opcion(pdj.img.opcion);
-		opciones.get(0)[2] = new Opcion(pdj.img.opcion);
-		opciones.get(0)[0].setearPosicionObjeto(175, 100);
-		opciones.get(0)[1].setearPosicionObjeto(175, 200);
-		opciones.get(0)[2].setearPosicionObjeto(175, 300);
-		opciones.get(0)[0].setRespuesta("Respuesta numero 1");
-		opciones.get(0)[1].setRespuesta("Respuesta numero 2");
-		opciones.get(0)[2].setRespuesta("Respuesta numero 3");
-		opciones.get(0)[0].setMensaje("Mensaje de prueba 1");
-		opciones.get(0)[1].setMensaje("Mensaje de prueba 2");
-		opciones.get(0)[2].setMensaje("Mensaje de prueba 3");
+	public void setConjuntosDeOpciones(int cantDeConj) {
+	    HashMap<Integer, Opcion[]> nuevasOpciones = new HashMap<>();
+
+	    for (int i = 0; i < cantDeConj; i++) {
+	        Opcion[] grupo = new Opcion[3];
+
+	        for (int j = 0; j < grupo.length; j++) {
+	            grupo[j] = new Opcion(pdj.img.opcion);
+	            grupo[j].setearPosicionObjeto(175, 100 + j * 100);
+	        }
+
+	        nuevasOpciones.put(i, grupo);
+	    }
+
+	    this.setOpciones(nuevasOpciones);
 	}
 	
 	public void habilitarOpciones() {
@@ -154,8 +141,16 @@ public class Entidad {
 		if(mensaje[dialogoIndice] == null) {
 			dialogoIndice = 0;
 		}
-		
 	}
+	
+	public void setImagenes(BufferedImage cuerpo, BufferedImage cabeza) {
+		setCuerpo(cuerpo);
+		setCabeza(cabeza);
+	}
+	
+	public void cargarMensajes() {}
+	
+	public void cargarOpciones() {}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -191,12 +186,40 @@ public class Entidad {
 		this.hayOpciones = hayOpciones;
 	}
 
-	public String getMensaje(int indice) {
+	public String obtenerMensaje(int indice) {
 		return mensaje[indice];
 	}
 
-	public void setMensaje(String[] mensaje) {
+	public void setMensajes(String[] mensaje) {
 		this.mensaje = mensaje;
+	}
+	
+	public void configurarMensajeByIndice(int indice, String mensaje) {
+		this.mensaje[indice] = mensaje;
+	}
+
+	public HashMap<Integer, Opcion[]> getOpciones() {
+		return opciones;
+	}
+
+	public void setOpciones(HashMap<Integer, Opcion[]> opciones) {
+		this.opciones = opciones;
+	}
+
+	public BufferedImage getCabeza() {
+		return cabeza;
+	}
+
+	public void setCabeza(BufferedImage cabeza) {
+		this.cabeza = cabeza;
+	}
+
+	public BufferedImage getCuerpo() {
+		return cuerpo;
+	}
+
+	public void setCuerpo(BufferedImage cuerpo) {
+		this.cuerpo = cuerpo;
 	}
 
 

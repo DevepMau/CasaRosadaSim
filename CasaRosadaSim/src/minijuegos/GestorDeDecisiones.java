@@ -24,7 +24,7 @@ public class GestorDeDecisiones {
 				
 				pnj.siguienteDialogoIndice();
 				
-				mensaje = pnj.getMensaje(pnj.getDialogoIndice());
+				mensaje = pnj.obtenerMensaje(pnj.getDialogoIndice());
 				
 				if(!mensaje.equals(pnj.FIN_DE_DIALOGO)) {
 					

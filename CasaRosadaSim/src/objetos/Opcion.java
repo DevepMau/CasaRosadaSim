@@ -29,6 +29,11 @@ public class Opcion extends ObjetoInteractivo {
 		g2.drawString(respuesta, getPosX() + 16, getPosY() + 32);
 	}
 	
+	public void setearOpcion(String mensaje, String respuesta) {
+		setMensaje(mensaje);
+		setRespuesta(respuesta);
+	}
+	
 	//////////////////////////////////////////////////////////////////////
 
 	public String getMensaje() {
