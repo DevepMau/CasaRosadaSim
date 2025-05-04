@@ -25,13 +25,13 @@ public class Raton implements MouseListener, MouseMotionListener {
 
 	@Override
     public void mouseClicked(MouseEvent e) {
-    	CLICK = true;
-    	CLICK = false;
+    	//CLICK = true;
+    	//System.out.println("clicked");
     }
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-	    CLICK = true;
+		CLICK = true;
 	    pdj.setCursor(cursorClick);
 	}
 
@@ -60,7 +60,7 @@ public class Raton implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-    	CLICK = true;
+    	//CLICK = true;
     	pdj.setCursor(cursorClick);
     }
 }

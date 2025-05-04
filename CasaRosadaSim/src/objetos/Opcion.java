@@ -1,5 +1,6 @@
 package objetos;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -19,6 +20,13 @@ public class Opcion extends ObjetoInteractivo {
 	
 	public void dibujar(Graphics2D g2) {
 		super.dibujar(g2);
+		if(this.isColision()) {
+			g2.setColor(Color.black);
+		}
+		else {
+			g2.setColor(Color.white);
+		}
+		g2.drawString(respuesta, getPosX() + 16, getPosY() + 32);
 	}
 	
 	//////////////////////////////////////////////////////////////////////

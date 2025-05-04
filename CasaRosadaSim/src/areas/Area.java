@@ -10,12 +10,14 @@ public class Area {
 	PanelDeJuego pdj;
 	private int unidad;
  	private int anchoDeLinea;
+ 	private int delay;
 	private Color blancoLinea  = new Color(255, 255, 255);
  	private Color azulMecanico  = new Color(72, 82, 98);
  	private Color negroTransparente = new Color(0, 0, 0, 205);
 	
 	public Area (PanelDeJuego pdj) {
 		this.pdj = pdj;
+		this.delay = pdj.DELAY_VALOR;
 		this.unidad = pdj.tamañoDeBaldosa;
  		this.anchoDeLinea = pdj.tamañoDeBaldosa/8;
 	}
@@ -27,6 +29,18 @@ public class Area {
 	}
 	
 	public void dibujar(Graphics2D g2) {}
+	
+	public int getDelay() {
+		return this.delay;
+	}
+	
+	public void resetDelay() {
+		this.delay = pdj.DELAY_VALOR;
+	}
+	
+	public void delayOn() {
+		this.delay--;
+	}
 	
 	public int getUnidad() {return unidad;}
 

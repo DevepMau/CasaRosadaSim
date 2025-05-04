@@ -2,6 +2,7 @@ package areas;
 
 import java.awt.Graphics2D;
 
+import entidades.Entidad;
 import objetos.ObjetoInteractivo;
 import principal.PanelDeJuego;
 
@@ -18,10 +19,11 @@ public class AREA_Telefono extends Area {
  			objeto.actualizar(pdj.raton.posX, pdj.raton.posY);
  		}
 		
-		if(pdj.raton.CLICK) {
+		if(pdj.raton.CLICK && pdj.botonOn) {
+
  			if(pdj.contactos[0].isColision()) {
+ 				
  				pdj.gdd.setearPNJ(pdj.gabinete[0]);
- 				pdj.estadoDeJuego = pdj.MODO_DIALOGO;
  			}
  			/*/else if(pdj.contactos[1].isColision()) {
  			}

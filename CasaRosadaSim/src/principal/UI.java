@@ -10,9 +10,6 @@ package principal;
  import java.text.NumberFormat;
  import java.util.Locale;
 
-import entidades.Entidad;
-import objetos.Opcion;
-
  
  public class UI {
  
@@ -21,9 +18,9 @@ import objetos.Opcion;
  	Font maruMonica;
  	int unidad;
  	int anchoDeLinea;
- 	Color blancoLinea  = new Color(255, 255, 255);
- 	Color azulMecanico  = new Color(72, 82, 98);
- 	Color negroTransparente = new Color(0, 0, 0, 205);
+ 	public Color blancoLinea  = new Color(255, 255, 255);
+ 	public Color azulMecanico  = new Color(72, 82, 98);
+ 	public Color negroTransparente = new Color(0, 0, 0, 205);
  	public boolean textoCompleto = false;
  	public String nombreDePNJ = "";
  	public String dialogoActual = "";
@@ -102,9 +99,21 @@ import objetos.Opcion;
 		y += pdj.tamañoDeBaldosa;
 		
 		if(!textoCompleto) {
+			
 			if(cont < dialogoActual.length()) {
-				dialogoMostrado += dialogoActual.charAt(cont);
-				cont++;	
+				
+				if(pdj.raton.CLICK && pdj.botonOn) {
+					
+					dialogoMostrado = dialogoActual;
+					cont = dialogoActual.length();
+					pdj.resetDelay();
+				}
+				else {
+					
+					dialogoMostrado += dialogoActual.charAt(cont);
+					cont++;	
+				}
+				
 			}
 			else {
 				textoCompleto = true;
@@ -120,28 +129,12 @@ import objetos.Opcion;
 
 	}
  	
- 	public void dibujarPantallaDeOpciones(Entidad pnj,Graphics2D g2) {
- 		
- 		g2.setColor(negroTransparente);
- 		g2.fillRect(0, 0, pdj.anchoDePantalla, pdj.altoDePantalla);
- 		
- 		g2.setColor(blancoLinea);
- 		g2.setFont(maruMonica);
- 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 24F));
- 		
- 		for(Opcion opciones : pnj.opciones.get(0)) {
- 			opciones.dibujar(g2);
- 			g2.drawString(opciones.getMensaje(), opciones.getPosX() + pdj.tamañoDeBaldosa/2, opciones.getPosY() + pdj.tamañoDeBaldosa/2 + pdj.tamañoDeBaldosa/6);
- 		}
- 		
- 	}
- 	
- 	public void setearDialogo(String dialogo) {
+ 	public void setearDialogo() {
  		
  		textoCompleto = false;
  		dialogoMostrado = "";
- 		if(!dialogo.isEmpty()) {dialogoActual = dialogo;}
  	 	cont = 0;
+ 	 	pdj.resetDelay();
  	 	
  	}
  	

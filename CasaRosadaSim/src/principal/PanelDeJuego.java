@@ -31,6 +31,11 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int maxFilaDeMundo = 12;
 	public final int anchoMundo = tamañoDeBaldosa * maxColDeMundo;
 	public final int altoMundo = tamañoDeBaldosa * maxFilaDeMundo;
+	
+	//VARIABLES COMUNES
+	public final int DELAY_VALOR = 24;
+	public int delay = DELAY_VALOR;
+	public boolean botonOn = true;
 
 	//ESTADO DE LA NACION
 	Datos data = new Datos();
@@ -74,7 +79,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int ZONA_MUÑECO = 3;
 	public final int ZONA_CARPETAS = 4;
 	public final int ZONA_LIBRO = 5;
-	
 	
 	// FPS
 	int FPS = 60;
@@ -148,8 +152,20 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		}
 
 	}
+	
+	public void resetDelay() {
+		botonOn = false;
+		this.delay = this.DELAY_VALOR;
+	}
 
 	public void actualizar() {
+
+		if(this.delay > 0) {
+			this.delay--;
+		}
+		else {
+			botonOn = true;
+		}
 
 		if(estadoDeJuego == MODO_JUEGO) {
 			
@@ -189,9 +205,6 @@ public class PanelDeJuego extends JPanel implements Runnable {
 		else if(estadoDeJuego == MODO_DIALOGO) {
 			gdd.dibujar(g2);
 			
-			if(gdd.isMostrarOpciones()) {
-				ui.dibujarPantallaDeOpciones(gdd.getPNJ() ,g2);
-			}
 		}
 		else if(estadoDeJuego == MODO_JUEGO){
 			

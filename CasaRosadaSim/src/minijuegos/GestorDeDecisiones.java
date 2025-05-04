@@ -9,7 +9,8 @@ public class GestorDeDecisiones {
 	
 	PanelDeJuego pdj;
 	Entidad pnj;
-	private boolean mostrarOpciones = false;
+	String mensaje;
+	private boolean mostrarUIDeOpciones = false;
 	
 	public GestorDeDecisiones(PanelDeJuego pdj) {
 		this.pdj = pdj;
@@ -18,25 +19,33 @@ public class GestorDeDecisiones {
 	public void actualizar() {
 		
 		if(pnj != null) {
-			if(pdj.ui.textoCompleto && (pdj.teclado.ENTER || pdj.raton.CLICK)) {
-
-				if(!pnj.mensaje[pnj.getIndice()].isEmpty()) {
+			
+			if(pdj.ui.textoCompleto && (pdj.teclado.ENTER || pdj.raton.CLICK) && !pnj.hayOpciones() && pdj.botonOn) {
+				
+				pnj.siguienteDialogoIndice();
+				
+				mensaje = pnj.getMensaje(pnj.getDialogoIndice());
+				
+				if(!mensaje.equals(pnj.FIN_DE_DIALOGO)) {
+					
+					if(!mensaje.trim().isEmpty()) {
 						
-					System.out.println("dialogo: "+pdj.ui.dialogoActual);
-					System.out.println("///////////////////////////////////////////////");
-					pdj.ui.setearDialogo(pnj.mensaje[pnj.siguienteIndice()]);
-					mostrarOpciones = false;
+						pdj.ui.setearDialogo();
+						
+					}
+					else {
+						
+						pnj.habilitarOpciones();
+	
+					}		
 					
 				}
 				else {
 					
-					mostrarOpciones = true;
-					pnj.hayOpciones = true;
-					
+					salirDeGDD();
 				}
+
 			}
-			
-			pdj.ui.nombreDePNJ = pnj.getNombre();
 			
 			pnj.actualizar();
 			
@@ -59,14 +68,20 @@ public class GestorDeDecisiones {
 	
 	public void setearPNJ(Entidad pnj) {
 		this.pnj = pnj;
+		pdj.resetDelay();
+		pdj.estadoDeJuego = pdj.MODO_DIALOGO;
+	}
+	
+	public void salirDeGDD() {
+		pdj.resetDelay();
+		pnj.siguienteDialogoIndice();
+		pdj.ui.setearDialogo();
+		pdj.estadoDeJuego = pdj.MODO_JUEGO;
+		pdj.zonaDeJuego = pdj.ZONA_TELEFONO;
 	}
 
-	public boolean isMostrarOpciones() {
-		return mostrarOpciones;
-	}
-
-	public void setMostrarOpciones(boolean mostrarOpciones) {
-		this.mostrarOpciones = mostrarOpciones;
+	public boolean habilitarUIDeOpciones() {
+		return mostrarUIDeOpciones;
 	}
 
 }
