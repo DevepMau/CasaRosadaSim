@@ -20,6 +20,8 @@ public class GestorDeDecisiones {
 		
 		if(pnj != null) {
 			
+			pdj.ui.nombreDePNJ = pnj.getNombre();
+			
 			if(pdj.ui.textoCompleto && (pdj.teclado.ENTER || pdj.raton.CLICK) && !pnj.hayOpciones() && pdj.botonOn) {
 				
 				pnj.siguienteDialogoIndice();

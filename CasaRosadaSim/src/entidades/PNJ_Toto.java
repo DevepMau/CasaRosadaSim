@@ -30,28 +30,45 @@ public class PNJ_Toto extends Entidad {
 		
 		this.setMensajes(new String[10]);
 		
-		this.configurarMensajeByIndice(0, "Señor presidente! desea que hagamos otro pedido al FMI?\n"
-			                            + "Tambien si gusta podemos realizar algun recorte! Si me\n"
-			                            + "pregunta considero que la luz esta muy barata :D");
-		this.configurarMensajeByIndice(1, "Por favor digame que es lo que tiene en mente! ¿O acaso\n"
-			                            + "refiere que sea yo quien elija como debetiamos proceder?\n"
-			                            + "si es asi, no hay problema! confie en mi presi-kun! AH! \n"
-			                            + "Lo siento! quiero decir... Señor Presidente!");
-		this.configurarMensajeByIndice(2, "");
-		this.configurarMensajeByIndice(3, "Hasta la proxima, señor presidente!");
-		this.configurarMensajeByIndice(4, FIN_DE_DIALOGO);
-		this.configurarMensajeByIndice(5, "nueva conversacion");
-		this.configurarMensajeByIndice(6, "fin de nueva conversacion");
-		this.configurarMensajeByIndice(7, FIN_DE_DIALOGO);
+		///////////////////////////////////////////////////////////////////////////////////////////\n/////////
+		
+		this.configurarMensajeByIndice(0, "Buenos días, Señor Presidente. Mi rostro no cambia, pero\n"
+				                        + "mi interés económico sí.");
+		
+		this.configurarMensajeByIndice(1, "Anoche soñé con una licuadora gigante que convertía pla\n"
+				                        + "-nes sociales en reservas del Banco Central. Fue… *sigh*.\n"
+				                        + "Bueno, volvamos al trabajo.");
+		
+		this.configurarMensajeByIndice(2, "He modelado tres posibles escenarios para enfrentar el \n"
+				                        + "déficit. Elija sabiamente, aunque yo igual voy a ejecutar\n"
+				                        + "lo que me parezca mas conveniente para el pais.");
+		
+		this.configurarMensajeByIndice(3, "");
+		
+		this.configurarMensajeByIndice(4, "Entonces me retiro, Señor Presidente. Seguiré monitoreando\n"
+				                        + "la economía… ");
+		
+		this.configurarMensajeByIndice(5, "Desde la terraza del BCRA. Necesito absorber sol para man\n"
+				                        + "-tenerme activa. Moái-chuu~");
+		
+		this.configurarMensajeByIndice(6, FIN_DE_DIALOGO);
 		
 	}
 	
 	public void cargarOpciones() {
 		
 		setConjuntosDeOpciones(1);
-		getOpciones().get(0)[0].setearOpcion("Mensaje de prueba 1", "Respuesta numero 1");
-		getOpciones().get(0)[1].setearOpcion("Mensaje de prueba 2", "Respuesta numero 2");
-		getOpciones().get(0)[2].setearOpcion("Mensaje de prueba 3", "Respuesta numero 3");
+		
+		//////////////////////////////////////  //////////////////////////////////////////////////////\n/////////
+		getOpciones().get(0)[0].setearOpcion("Cortar todos los subsidios y liberar el tipo de cambio.", 
+				                             "Una decisión fría, brutal y ortodoxa. Me agrada. Su alma\n"
+				                           + "huele a recesión, pero con metas claras");
+		getOpciones().get(0)[1].setearOpcion("Subsidios limitados, ajuste gradual y diálogo con sectores.", 
+				                             "Tibio. Ni carne ni soja. Pero al menos no me da arcadas\n"
+				                           + "monetarias");
+		getOpciones().get(0)[2].setearOpcion("Plan de estímulo. Emisión controlada y ayuda a los más vulnerables.", 
+				                             "¿Usted quiere inflación o solo me está provocando? Esto\n"
+				                           + "no es un simulador de caricias, Señor...");
 	}
 
 }

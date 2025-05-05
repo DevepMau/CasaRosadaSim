@@ -16,6 +16,7 @@ public class Entidad {
 	private int direccion = 1;
 	private int tiempoMov = 40;
 	private int imageMov = 0;
+	private int afecto = 0;
 	private boolean hayOpciones = false;
 	private String nombre;
 	private String[] mensaje;
@@ -220,6 +221,25 @@ public class Entidad {
 
 	public void setCuerpo(BufferedImage cuerpo) {
 		this.cuerpo = cuerpo;
+	}
+
+	public int obtenerAfecto() {
+		return afecto;
+	}
+
+	public void modifiarAfecto(int valor) {
+		
+		int suma = this.afecto + valor;
+		
+		if(suma < 0) {
+			this.afecto = 0;
+		}
+		else if(suma > 100) {
+			this.afecto = 100;
+		}
+		else {
+			this.afecto = suma;
+		}
 	}
 
 
