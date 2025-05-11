@@ -62,4 +62,9 @@ public class Area {
 
 	public void setAzulMecanico(Color azulMecanico) {this.azulMecanico = azulMecanico;}
 
+	public void resetArea() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

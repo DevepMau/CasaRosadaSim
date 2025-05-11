@@ -10,6 +10,7 @@ public class GestorDeDecisiones {
 	PanelDeJuego pdj;
 	Entidad pnj;
 	String mensaje;
+	private boolean finDeEvento = false;
 	private boolean mostrarUIDeOpciones = false;
 	
 	public GestorDeDecisiones(PanelDeJuego pdj) {
@@ -22,7 +23,7 @@ public class GestorDeDecisiones {
 			
 			pdj.ui.nombreDePNJ = pnj.getNombre();
 			
-			if(pdj.ui.textoCompleto && (pdj.teclado.ENTER || pdj.raton.CLICK) && !pnj.hayOpciones() && pdj.botonOn) {
+			if(pdj.ui.textoCompleto && (pdj.teclado.ENTER || pdj.raton.CLICK) && !pnj.hayOpciones() && pdj.botonOn && !finDeEvento) {
 				
 				pnj.siguienteDialogoIndice();
 				
@@ -44,12 +45,21 @@ public class GestorDeDecisiones {
 				}
 				else {
 					
-					salirDeGDD();
+					pdj.transicionOn = true;
+					finDeEvento = true;
+					
 				}
 
 			}
 			
 			pnj.actualizar();
+			
+			if(finDeEvento) {
+				if(!pdj.ui.oscureciendo) {
+					salirDeGDD();
+					finDeEvento = false;
+				}
+			}
 			
 		}
 	}
@@ -80,6 +90,7 @@ public class GestorDeDecisiones {
 		pdj.ui.setearDialogo();
 		pdj.estadoDeJuego = pdj.MODO_JUEGO;
 		pdj.zonaDeJuego = pdj.ZONA_TELEFONO;
+		pdj.areas[2].resetArea();
 	}
 
 	public boolean habilitarUIDeOpciones() {

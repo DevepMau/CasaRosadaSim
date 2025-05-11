@@ -7,6 +7,8 @@ import objetos.ObjetoInteractivo;
 import principal.PanelDeJuego;
 
 public class AREA_Telefono extends Area {
+	
+	Entidad pnjElegido = null;
 
 	public AREA_Telefono(PanelDeJuego pdj) {
 		super(pdj);
@@ -23,7 +25,8 @@ public class AREA_Telefono extends Area {
 
  			if(pdj.contactos[0].isColision()) {
  				
- 				pdj.gdd.setearPNJ(pdj.gabinete[0]);
+ 				pnjElegido = pdj.gabinete[0];
+ 				pdj.transicionOn = true;
  			}
  			/*/else if(pdj.contactos[1].isColision()) {
  			}
@@ -37,6 +40,11 @@ public class AREA_Telefono extends Area {
  			}/*/
  		}
 		
+		if(pnjElegido != null) {
+			if(!pdj.ui.oscureciendo) {
+				pdj.gdd.setearPNJ(pnjElegido);
+			}
+		}
 	}
 	
 	public void dibujar(Graphics2D g2) {
@@ -49,6 +57,10 @@ public class AREA_Telefono extends Area {
  			objeto.dibujar(g2);
  			objeto.dibujarAreaSolida(g2);
  		}/*/
+	}
+	
+	public void resetArea() {
+		pnjElegido = null;
 	}
 
 }
