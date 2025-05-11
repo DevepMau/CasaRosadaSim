@@ -12,12 +12,18 @@ package principal;
 
  
  public class UI {
+	 
+	final int TIMER_VALOR = 50;
  
  	PanelDeJuego pdj;
  	Graphics2D g2;
  	Font maruMonica;
  	int unidad;
  	int anchoDeLinea;
+ 	int timerTransicion = TIMER_VALOR;
+ 	int valorDeCambio = 1;
+ 	public boolean oscureciendo = true;
+ 	int alpha = 0; // Transparencia inicial
  	public Color blancoLinea  = new Color(255, 255, 255);
  	public Color azulMecanico  = new Color(72, 82, 98);
  	public Color negroTransparente = new Color(0, 0, 0, 205);
@@ -59,6 +65,7 @@ package principal;
  		case 2 -> dibujarPantallaDePausa();
  		case 3 -> dibujarPantallaDeDialogo();
  		}
+ 		cambioDeEscenaEfecto();
  
  	}
  	
@@ -136,6 +143,28 @@ package principal;
  	 	cont = 0;
  	 	pdj.resetDelay();
  	 	
+ 	}
+ 	
+ 	public void cambioDeEscenaEfecto() {
+ 	    if (pdj.transicionOn) {
+ 	        g2.setColor(new Color(0, 0, 0, alpha));
+ 	        g2.fillRect(0, 0, pdj.anchoDePantalla, pdj.altoDePantalla);
+
+ 	        if (oscureciendo) {
+ 	            alpha += 15;
+ 	            if (alpha >= 255) {
+ 	                alpha = 255;
+ 	                oscureciendo = false;
+ 	            }
+ 	        } else {
+ 	            alpha -= 15;
+ 	            if (alpha <= 0) {
+ 	                alpha = 0;
+ 	                pdj.transicionOn = false;
+ 	                oscureciendo = true;
+ 	            }
+ 	        }
+ 	    }
  	}
  	
  	private void dibujarFondo() {
