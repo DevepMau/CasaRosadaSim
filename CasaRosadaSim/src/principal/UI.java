@@ -75,8 +75,6 @@ package principal;
  	public void dibujarPantallaDeJuego() {
  		dibujarFondo();
  		interfazDeReservas();
- 		interfazDeFecha();
- 		//infoSobrereservas();
  	}
  	
  	public void dibujarPantallaDePausa() {
@@ -186,44 +184,6 @@ package principal;
  		g2.setColor(blancoLinea);
  		g2.drawString(texto, obtenerXParaTextoCentrado(texto, ancho), posY + unidad/2 + anchoDeLinea*2);
  	}
- 	
- 	/*/private void infoSobrereservas() {
- 		
- 		int alto = unidad*3 + unidad/2;
- 		int ancho = unidad*7;
- 		int posX = anchoDeLinea;
- 		int posY = unidad + (unidad/2);
- 		
- 		String exportaciones = formato.format(pdj.data.getIngresoExportaciones())+ " M";
- 		String inversiones = formato.format(pdj.data.getIngresoInversiones())+ " M";
- 		String importaciones = formato.format(pdj.data.getGastoImportaciones())+ " M";
- 		String cuotaDeDeuda = formato.format(pdj.data.getPagoDeuda())+ " M";
- 		String variacionSemanal = formato.format(pdj.data.variacionSemanal())+ " M";
- 		
- 		dibujarSubVentana(posX, posY, ancho, alto);
- 		
- 		g2.setStroke(new BasicStroke());
- 		g2.setFont(g2.getFont().deriveFont(Font.BOLD,24f));
- 		g2.setColor(blancoLinea);
- 		g2.drawString("Exportaciones: ", posX*2, posY + unidad/2 + anchoDeLinea);
- 		g2.drawString("Inversiones: ", posX*2, posY + unidad + anchoDeLinea);
- 		g2.drawString("Importaciones: ", posX*2, posY + unidad + (unidad/2) + anchoDeLinea);
- 		g2.drawString("Cuota de deuda: ", posX*2, posY + unidad*2 + anchoDeLinea);
- 		g2.drawString("Total: ", posX*2, posY + unidad*3 + anchoDeLinea);
- 		
- 		g2.setColor(Color.green);
- 		g2.drawString(exportaciones, ancho - anchoDeLinea*2 - (anchoDeTexto(exportaciones)), posY + unidad/2 + anchoDeLinea);
- 		g2.drawString(inversiones, ancho - anchoDeLinea*2 - (anchoDeTexto(inversiones)), posY + unidad + anchoDeLinea);
- 		g2.setColor(Color.red);
- 		g2.drawString(importaciones, ancho - anchoDeLinea*2 - (anchoDeTexto(importaciones)), posY + unidad + (unidad/2) + anchoDeLinea);
- 		g2.drawString(cuotaDeDeuda, ancho - anchoDeLinea*2 - (anchoDeTexto(cuotaDeDeuda)), posY + unidad*2 + anchoDeLinea);
- 		if(pdj.data.variacionSemanal() >= 0) {
- 			g2.setColor(Color.green);
- 		}
- 		g2.drawString(variacionSemanal, ancho - anchoDeLinea*2 - (anchoDeTexto(variacionSemanal)), posY + unidad*3 + anchoDeLinea);
- 		g2.setColor(blancoLinea);
- 		
- 	}/*/
  	
  	public void interfazDeFecha() {
  		

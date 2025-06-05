@@ -25,7 +25,7 @@ public class AREA_Oficina extends Area {
  				pdj.zonaDeJuego = pdj.ZONA_NOTEBOOK;
  			}
  			else if(pdj.mobiliario[1].isColision()) {
- 				pdj.zonaDeJuego = pdj.ZONA_CARPETAS;
+ 				pdj.zonaDeJuego = pdj.ZONA_CALENDARIO;
  			}
  			else if(pdj.mobiliario[2].isColision()) {
  				pdj.zonaDeJuego = pdj.ZONA_TELEFONO;

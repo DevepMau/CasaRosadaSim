@@ -40,7 +40,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public boolean transicionOn = false;
 
 	//ESTADO DE LA NACION
-	Datos data = new Datos();
+	public Datos data = new Datos();
 	
 	//SISTEMA
 	public Teclado teclado = new Teclado(this);
@@ -79,7 +79,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public final int ZONA_NOTEBOOK = 1;
 	public final int ZONA_TELEFONO = 2;
 	public final int ZONA_MUÑECO = 3;
-	public final int ZONA_CARPETAS = 4;
+	public final int ZONA_CALENDARIO = 4;
 	public final int ZONA_LIBRO = 5;
 	
 	// FPS
@@ -166,7 +166,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			case ZONA_NOTEBOOK -> areas[1].actualizar();
 			case ZONA_TELEFONO -> areas[2].actualizar();
 			case ZONA_MUÑECO -> areas[3].actualizar();
-			case ZONA_CARPETAS -> areas[5].actualizar();
+			case ZONA_CALENDARIO -> areas[5].actualizar();
 			case ZONA_LIBRO -> areas[4].actualizar();
 			default -> areas[0].actualizar();
 			
@@ -207,7 +207,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 			case ZONA_NOTEBOOK -> areas[1].dibujar(g2);
 			case ZONA_TELEFONO -> areas[2].dibujar(g2);
 			case ZONA_MUÑECO -> areas[3].dibujar(g2);
-			case ZONA_CARPETAS -> areas[5].dibujar(g2);
+			case ZONA_CALENDARIO -> areas[5].dibujar(g2);
 			case ZONA_LIBRO -> areas[4].dibujar(g2);
 			default -> areas[0].dibujar(g2);
 			

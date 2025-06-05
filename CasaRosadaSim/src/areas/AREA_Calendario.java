@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 
 import principal.PanelDeJuego;
 
-public class AREA_Carpetas extends Area {
+public class AREA_Calendario extends Area {
 
-	public AREA_Carpetas(PanelDeJuego pdj) {
+	public AREA_Calendario(PanelDeJuego pdj) {
 		super(pdj);
 		// TODO Auto-generated constructor stub
 	}
@@ -20,7 +20,7 @@ public class AREA_Carpetas extends Area {
 		g2.fillRect(0, 0, pdj.anchoDePantalla, pdj.altoDePantalla);
 		
 		g2.setColor(getBlancoLinea());
-		g2.drawString("Carpetas", 400, 300);
+		g2.drawString("Calendario", 400, 300);
 	}
 
 }
