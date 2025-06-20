@@ -21,6 +21,9 @@ public class Imagenes {
 	public BufferedImage[] contacto = new BufferedImage[2];
 	public BufferedImage[] opcion = new BufferedImage[2];
 	
+	//EFECTO
+	public BufferedImage[] tachado = new BufferedImage[3];
+	
 	//PERSONAJES
 	public BufferedImage toto_cuerpo;
 	public BufferedImage toto_cabeza;
@@ -63,6 +66,11 @@ public class Imagenes {
 		//CURSOR
 		cursor[0] = configurarImagen("/cursores/mano_click", 4);
 		cursor[1] = configurarImagen("/cursores/mano_normal", 4);
+		
+		//EFECTO
+		tachado[0] = configurarImagen("/efectos/tachado1", 4);
+		tachado[1] = configurarImagen("/efectos/tachado2", 4);
+		tachado[2] = configurarImagen("/efectos/tachado3", 4);
     	
     }
 
