@@ -38,6 +38,8 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public boolean botonOn = true;
 	
 	public boolean transicionOn = false;
+	public final int ESPERA_EN_TRANSICION = 15;
+	public int espera = ESPERA_EN_TRANSICION;
 
 	//ESTADO DE LA NACION
 	public Datos data = new Datos();
@@ -158,6 +160,7 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public void actualizar() {
 
 		runDelay();
+		cambiarFecha();
 
 		if(estadoDeJuego == MODO_JUEGO) {
 			
@@ -241,6 +244,20 @@ public class PanelDeJuego extends JPanel implements Runnable {
 	public void resetDelay() {
 		botonOn = false;
 		this.delay = this.DELAY_VALOR;
+	}
+	
+	public void cambiarFecha() {
+		if(this.data.getAcciones() == 0) {
+			this.transicionOn = true;
+			if(this.espera > 0) {
+				this.espera--;
+			}
+			else {
+				this.data.avanzarTiempo();
+				this.data.restaurarAcciones();
+				this.espera = this.ESPERA_EN_TRANSICION;
+			}
+		}
 	}
 
 }

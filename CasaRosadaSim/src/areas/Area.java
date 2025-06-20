@@ -25,6 +25,9 @@ public class Area {
 	public void actualizar() {
 		if(pdj.teclado.ESCAPE) {
  			pdj.zonaDeJuego = pdj.ZONA_OFICINA;
+ 			if(pdj.data.getAcciones() > 0) {
+ 				pdj.data.gastarAccion();
+ 			}
  		}
 	}
 	

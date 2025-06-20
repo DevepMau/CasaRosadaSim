@@ -1,6 +1,11 @@
 package principal;
 
 public class Datos {
+	
+	// JUEGO
+	private final int ACCIONES_VALOR = 5;
+	private int acciones;
+	
     // ECONOMÍA
     private int reservas;  // Millones de dólares
     private int deudaExterna;  // Millones de dólares
@@ -30,6 +35,7 @@ public class Datos {
 
     // Constructor
     public Datos() {
+    	this.acciones = this.ACCIONES_VALOR;
         this.reservas = 30000;
         this.deudaExterna = 44000;
         this.valorDolar = 1000;
@@ -80,8 +86,29 @@ public class Datos {
     public String mostrarEstado() {
         return "Reservas: " + reservas + "M | Dólar: $" + valorDolar + " | Imagen Pública: " + imagenPublica + "%";
     }
+    
+    public void gastarAccion() { acciones--; }
+    
+    public void restaurarAcciones() { acciones = ACCIONES_VALOR; }
+    
+    public void avanzarTiempo() {
+    	if(semana < 4) {
+    		semana++;
+    	}
+    	else {
+    		semana = 1;
+    		if(mes < 12) {
+    			mes++;
+    		}
+    		else {
+    			mes = 1;
+    			año++;
+    		}
+    	}
+    }
 
     // Getters y Setters
+    public int getAcciones() { return acciones; }
     public int getReservas() { return reservas; }
     public int getImagenPublica() { return imagenPublica; }
     public int getDeudaExterna() { return deudaExterna; }
